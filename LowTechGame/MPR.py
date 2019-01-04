@@ -20,6 +20,7 @@ You should be able to leave things here to come back for them later.''')
             
             
 def leaveInMPR():
+    """Leave items in MPR"""
     cont=True
     if len(inventory)>0:
         item = raw_input("What do you want to leave in the MPR?")
@@ -42,6 +43,7 @@ def leaveInMPR():
         print("You don't have any items to leave in the MPR.")    
     
 def takeFromMPR():
+    """Take items from MPR"""
     cont=True
     if len(mprstorage)>0:
         item = raw_input("What do you want to take frpm the MPR?")
@@ -64,7 +66,7 @@ def takeFromMPR():
         print("There aren't any items to take from the MPR.")   
 
 def mprStorageCall():
-    """prints things left in the mpr"""
+    """Prints things left in the mpr"""
     if len(mprstorage)==0:
         print("Nothing is on the table.")
     elif len(mprstorage)==1:
@@ -75,6 +77,7 @@ def mprStorageCall():
             statement += item+", "
 
 def inventoryCall():
+    """Prints things in inventory"""
     print("You have ", end="")
     if len(inventory)==2:
         print("a",inventory[0],"and a",inventory[1],"in your hands.")
@@ -84,7 +87,7 @@ def inventoryCall():
         print("nothing in your hands.")
         
 def inventoryAdd(obj):
-    """adds obj to inventory. obj should be a string"""
+    """Adds obj to inventory. obj should be a string"""
     size=1
     if obj=="TSA Trophy":
         size =2
