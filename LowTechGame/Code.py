@@ -5,6 +5,7 @@ Player comes to LTLU to send a mass mail and finds hidden secrets in this thrill
 
 from __future__ import print_function
 from time import sleep
+import os
 
 #Constants
 ROOMS = ['1','2','3','4','5','6','cse','court yard', 'math', 'mpr', 'research wing', 'cim']
@@ -186,6 +187,9 @@ def hall():
     
 
 def intro():
+    clear = lambda: os.system('cls')
+    clear()
+    
     INTRO_TIME=0.3
     print ('L',end='')
     sleep(INTRO_TIME)
@@ -233,26 +237,48 @@ def intro():
     sleep(INTRO_TIME)
     
     global name
-    name = raw_input("What's your name?\n").split().lower()
+    name = raw_input("What's your name?\n").strip().lower()
+    if name == 'chanas':
+        print ('Oh hello there Chris. How are you today? It would be great if we could get a 100. Thanks\n')
+    if name == 'jesus':
+        print ('Hello Bob Dennis\n')
+    if name == '':
+        print ('Wow such a creative name. I applaud your parents.\n')
+        name = '[REDACTED]'
+    sleep(1)
+    print ('''You stand outside your university, the famous Low Tech Low University,
+the #1 STEM University for 8 times in the past 7 years. A sudden urge comes over you.
+You feel like sending a mass mail. Today is your day.''')
+    sleep(5)
+    
+    
     mapCall()
-    print ('You enter the familiar halls.')
+    print ('You enter the familiar halls.',end='')
 
+def clearScreen():
+    clear = lambda: os.system('cls')
+    clear()
 #Main
-if __name__ == '__main__':
+def main():
+#if __name__ == '__main__':
+    clearScreen()
     intro()
     game = True
     while game:
         hall()
         global end
         if end:
-            quitting = raw_input('Are you sure you want to quit?\n')
+            quitting = raw_input('Are you sure you want to quit?\n').strip().lower()
             if quitting == 'yes' or quitting =='y':
+                clearScreen()
                 print ('\nYou remember you can use your phone to send your mass mail.') 
                 sleep(1.5)
-                print ('\nHuh, neat.\n')
+                print ('\nHuh, neat.\n\n')
                 sleep(2)
                 print ('GAME OVER')
                 print ('THANKS FOR PLAYING')
                 game = False
-            else:
+            elif quitting == 'n' or quitting == 'n':
                 print ('You doubted whether you can do this, however you shake your head and steel your resolve.')
+            else:
+                print ('You confuse yourself by answering', quitting, 'to a yes or no question. You go back into the halls.')
