@@ -1,0 +1,168 @@
+
+                         ..zeeeeeee....                             
+                    .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$be. 
+                 .e$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\              
+               .$$$$$$$$$$$$$$$$$$$$$$$$$$$^                   $$$        
+             .$$$$$$$$$$*""        ""**""                      $$$  
+            z$$$$$$$$""                                        $$$  
+           d$$$$$$$"                          4.Research Wing  $$$  
+          d$$$$$$"   1.CSE                                     $$$  
+         d$$$$$$"         _.-""""-._                           $$$  
+        .$$$$$$F        .'          `.                         $$$ 
+        d$$$$$$        /      __      \                        $$$  
+       .$$$$$$F       |     ==  ==     |       4$$$$$$$$$$$$$$$$$/           
+       :$$$$$$|      |    Court Yard    |      |$$$$$$$$$$$$$$$P"            
+       !$$$$$$|      |     ==    ==     |      |$$$$$$$            
+        $$$$$$b       |     ==__==     |       4$$$$$$'           
+        3$$$$$$        \              /        $$$$$$P            
+         $$$$$$b        `._        _.'        d$$$$$$"            
+         '$$$$$$b.         `-....-'          d$$$$$$F             
+          "$$$$$$$b  2.Math         3.MPR  .$$$$$$$P       ================
+           "$$$$$$$$.                    .$$$$$$$$"        Low Tech 
+            ^$$$$$$$$$e.              .e$$$$$$$$$"         Low Univerity
+              "$$$$$$$$$$$ee.    .ee$$$$$$$$$$$*           ================
+                "$$$$$$$$$$$$|  |$$$$$$$$$$$$"    
+                  "*$$$$$$$$$|  |$$$$$$$$$*"       
+                     ^"*$$$$$|  |$$$$$*""      
+                            "]  ["   
+                           
+
+
+
+                                               $$$$$$$$$
+                                               $       $
+                                               $ 6.CIM $
+                                               $       $
+                                               $$$} {$$$
+                                                  | |
+                         ..zeeeeeee....           | |               
+                    .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$| |$$$$$$$$be. 
+                 .e$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$} {$$$$$$$$$$$\              
+               .$$$$$$$$$$$$$$$$$$$$$$$$$$$^                   $$$        
+             .$$$$$$$$$$*""        ""**""                      $$$  
+            z$$$$$$$$""                                        $$$  
+           d$$$$$$$"                          4.Research Wing  $$$  
+          d$$$$$$"   1.CSE                                     $$$  
+         d$$$$$$"         _.-""""-._                           $$$  
+        .$$$$$$F        .'          `.                         $$$ 
+        d$$$$$$        /      __      \                        $$$  
+       .$$$$$$F       |     ==  ==     |       4$$$$$$$$$$$$$$$$$/           
+       :$$$$$$|      |  5.Court Yard    |      |$$$$$$$$$$$$$$$P"            
+       !$$$$$$|      |     ==    ==     |      |$$$$$$$            
+        $$$$$$b       |     ==__==     |       4$$$$$$'           
+        3$$$$$$        \              /        $$$$$$P            
+         $$$$$$b        `._        _.'        d$$$$$$"            
+         '$$$$$$b.         `-....-'          d$$$$$$F             
+          "$$$$$$$b  2.Math         3.MPR  .$$$$$$$P       ================
+           "$$$$$$$$.                    .$$$$$$$$"        Low Tech 
+            ^$$$$$$$$$e.              .e$$$$$$$$$"         Low Univerity
+              "$$$$$$$$$$$ee.    .ee$$$$$$$$$$$*           Dennis Unleashed
+                "$$$$$$$$$$$$|  |$$$$$$$$$$$$"             ================
+                  "*$$$$$$$$$|  |$$$$$$$$$*"       
+                     ^"*$$$$$|__|$$$$$*""      
+                            "    "   
+
+
+
+                                               $$$$$$$$$
+                                               $       $
+                                               $ 6.CIM $
+                                               $       $
+                                               $$$} {$$$
+                                                  | |
+                         ..zeeeeeee....           | |               
+                    .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$| |$$$$$$$$be. 
+                 .e$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$} {$$$$$$$$$$$\              
+               .$$$$$$$$$$$$$$$$$$$$$$$$$$$^                   $$$        
+             .$$$$$$$$$$*""        ""**""                      $$$  
+            z$$$$$$$$""                                        $$$  
+           d$$$$$$$"                          4.Research Wing  $$$  
+          d$$$$$$"   1.CSE                                     $$$  
+         d$$$$$$"         _.-""""-._                           $$$  
+        .$$$$$$F        .'          `.                         $$$ 
+        d$$$$$$        /      __      \                        $$$  
+       .$$$$$$F       |     ==  ==     |       4$$$$$$$$$$$$$$$$$/           
+       :$$$$$$|      |  5.Court Yard    |      |$$$$$$$$$$$$$$$P"            
+       !$$$$$$|      |     ==    ==     |      |$$$$$$$            
+        $$$$$$b       |     ==__==     |       4$$$$$$'           
+        3$$$$$$        \              /        $$$$$$P            
+         $$$$$$b        `._        _.'        d$$$$$$"            
+         '$$$$$$b.         `-....-'          d$$$$$$F             
+          "$$$$$$$b  2.Math         3.MPR  .$$$$$$$P       ================
+           "$$$$$$$$.                    .$$$$$$$$"        Low Tech 
+            ^$$$$$$$$$e.              .e$$$$$$$$$"         Low Univerity
+              "$$$$$$$$$$$ee.    .ee$$$$$$$$$$$*           Dennis Unleashed
+                "$$$$$$$$$$$$|  |$$$$$$$$$$$$"             ================
+                  "*$$$$$$$$$|  |$$$$$$$$$*"       
+                     ^"*$$$$$|  |$$$$$*""      
+                            "]  ["   
+
+
+Low Tech Low University
+*start*
+*name prompt*
+
+You stand outside your university, the famous Low Tech Low University, \n
+the #1 STEM University for 8 times in the past 7 years. A sudden urge comes over you.\n
+You feel like sending a mass mail. Today is your day.
+
+
+    /////////////////////
+
+          Low Tech
+       Low University   
+
+    /////////////////////
+
+
+You enter the familiar halls.
+Which room will you go to? (#)
+*Room Prompt*
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+Rooms
+
+MPR:
+Math:
+Court Yard:
+It is the middle of the night. You cannot see anything.
+You go outside. You cannot see anything. You turn on your flashlight and take a\n
+look around.
+A beam of light strikes something in the bushes. You search the bushes and find\n
+a key! Do you take it? (y/n)
+
+(n)
+You decide the key is too shiny for your hands. You leave it in the bushes
+
+(y)
+You pick up the key and brush off the dirt. It reads: ROOM KEY
+You go back inside.
+##inventory size +1
+
+CSE:
+You shake the handle of the door, but it is locked! You go back into the halls.
+You shake the handle of the door. It is locked, but you open it with your key.\n
+You enter the CSE room and see a computer on.
+
+*options - look at computer, leave*
+
+(Leave)
+You go back into the halls.
+Which room will you go to? (#)
+*Room Prompt*
+
+(Look at computer)
+You sign into your account. You open up an email and address it to the entire school...\n
+teachers included! What do you want to say?
+*text prompt*
+You look at your masterly crafted email. You click send. Suddenly... BANG! SLAM! KABOOM!\n
+You hear a loud voice in the distance. You think nothing of it. It slowly grows in intensity \n
+You now identify it as that of Mr. Dennis! You better check it out.
+
+You rush back into the halls.
+Which room will you go to? (#)
+*room prompt*
+
+
+
+
