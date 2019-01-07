@@ -36,7 +36,7 @@ MAP_1 = '''
                   "*$$$$$$$$$|  |$$$$$$$$$*"       
                      ^"*$$$$$|  |$$$$$*""      
                             "]  ["   
-                            
+                        0. Front Door
                             '''
 
 MAP_2 = '''
@@ -73,7 +73,7 @@ MAP_2 = '''
                   "*$$$$$$$$$|  |$$$$$$$$$*"       
                      ^"*$$$$$|__|$$$$$*""      
                             "    "   
-                            
+                        0. Front Door    
                             '''
 
 MAP_3 = '''
@@ -110,9 +110,8 @@ MAP_3 = '''
                   "*$$$$$$$$$|  |$$$$$$$$$*"       
                      ^"*$$$$$|  |$$$$$*""      
                             "]  ["   
-                            
+                         0. Front Door   
                             '''
-ROOMS = ['1','2','3','4','5','6','cse','court yard', 'math', 'mpr', 'research wing', 'cim','i','m','h']
 
 #Global variables
 dennis = False
@@ -159,21 +158,29 @@ def cse():
             sleep(1)
         elif choice == "c": # player goes to computer
             dennis = True
-            print("You sign into your gmail account. You open up an email and")
-            print("address it to the entire school... teachers included!")
+            print("""You sign into your gmail account. You open up an email and 
+address it to the entire school... teachers included!""")
             
             raw_input("What do you want to say? ") # does not matter
             
             print("\nYou look at your masterly crafted email and click send.\n")
             sleep(1)
-            print("Suddenly you hear a BANG! SLAM! KABOOM! and a loud voice")
-            print("coming from around the research wing.\n")
+            print("Suddenly you hear...")
             sleep(1)
-            print("You don't think anything of it until it grows in intensity")
-            print("and you realize it's Mr. Dennis! You'd better check it out!\n")
+            print("BANG!")
+            sleep(1)
+            print ("SLAM!")
+            sleep(1)
+            print ("KABOOM!")
+            sleep(1)
+            print("...and a loud voice coming from around the research wing.\n")
+            sleep(1)
+            print("""You don't think anything of it until it grows in intensity 
+and you realize it's Mr. Dennis! You'd better check it out!\n""")
             sleep(1)
             print("You rush back into the halls!")
             sleep(1)
+            mapCall()
     
 def math():
     print("You arrive at the math room and try the door, but it's locked.")
@@ -352,7 +359,22 @@ to turn on the flashlight. A glint appears in some bushes. Do you want to search
         print ("It is the middle of the night. You cannot see anything. You go back into the halls.")
 
 def cim():
-    pass
+    print ('''You walk over to the research wing and see a room to the north. Of course! How could you
+have forgotten? It's the CIM room! You peer through the glass windows and find Bob himself, reading your email.''')
+    action = raw_input("What do you do?\n").lower()
+    print ("You try to ", action, "but before you can do anything, Bob Dennis runs out the door in a fit of rage.")
+    print ("Oh well.")
+    take = raw_input("Inside the CIM room, you see a TSA Trophy. Do you want to take the trophy or leave?").lower()
+    if take == 't' or take == 'take':
+        inventoryAdd('TSA Trophy')
+    elif take == 'leave' or take == 'l':
+        print ("You leave the nostalgic room and go back into the halls.")
+    else:
+        print ("You try to do",action, "but you find you can't. You go back into the halls.") 
+    print ("You look around and find the school is different.")
+    global dennis_riddle
+    dennis_riddle = True
+    mapCall()
 
 def hall():
     '''User decisions'''
@@ -362,12 +384,9 @@ def hall():
         mapCall()
     elif command == 'i' or command == 'inv' or command == 'inventory':
         inventoryCall()    
-    elif command == 'q' or command == 'quit' or command == 'exit':
+    elif command == 'q' or command == 'quit' or command == 'exit' or command == '0' or command == 'front door':
         global end
         end = True
-    elif command not in ROOMS:
-        sleep(1)
-        print ("You wander around the halls but you don't find that room. Strange. Use command h for help.")
     elif command == '1' or command == 'cse':
         sleep(1)
         cse()
@@ -393,6 +412,9 @@ def hall():
     elif command == 'h':
         sleep(1)
         help()
+    else:
+        sleep(1)
+        print ("You wander around the halls but you don't find that room. Strange. Use command h for help.")
 
 def help():
     print ('')
@@ -448,7 +470,8 @@ def clearScreen():
     clear()
 
 #Main
-if __name__ == '__main__':
+#if __name__ == '__main__':
+def main():
     clearScreen()
     intro()
     game = True
