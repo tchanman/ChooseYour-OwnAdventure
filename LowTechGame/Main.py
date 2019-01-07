@@ -8,8 +8,6 @@ from time import sleep
 import os
 
 #Constants
-ROOMS = ['1','2','3','4','5','6','cse','court yard', 'math', 'mpr', 'research wing', 'cim']
-
 MAP_1 = '''
 
                          ..zeeeeeee....                             
@@ -114,12 +112,12 @@ MAP_3 = '''
                             "]  ["   
                             
                             '''
-
+ROOMS = ['1','2','3','4','5','6','cse','court yard', 'math', 'mpr', 'research wing', 'cim','i','m','h']
 
 #Global variables
 dennis = False
 main_door_riddle = False
-has_key = False
+dennis_riddle = False
 inventory = []
 mprstorage = []
 end = False
@@ -134,14 +132,14 @@ def mapCall():
     else:
         print (MAP_1)
 
-def CSE():
+def cse():
     print("You arrive at the CSE room and try the door, but it's locked.");
     sleep(1)
     
     # branches based on player having/not having the door key
     
     if not "key" in inventory: # player doesn't have key
-        print("You don't have a key with you so you go back into the halls.\n")
+        print("You go back into the halls.")
         sleep(1)
     else: # player has key
         print("Using the room key, you open the door and enter the room.")
@@ -153,11 +151,11 @@ def CSE():
         
         # while loop until valid choice is chosen
         while choice not in "cl":
-            choice = raw_input("That was not a choice. Choose C to go to the computer or L to leave the room." )
+            choice = raw_input("You wander around the room but you do not see that. What do you do?")
             sleep(0.25)
         
         if choice == "l": # player leaves
-            print("You go back into the halls.\n")
+            print("You go back into the halls.")
             sleep(1)
         elif choice == "c": # player goes to computer
             dennis = True
@@ -178,28 +176,82 @@ def CSE():
             sleep(1)
     
 def math():
-    pass
+    print("You arrive at the math room and try the door, but it's locked.")
+    sleep(1)
+    
+    # branches based on player having/not having the door key
+    
+    if not "key" in inventory: # player doesn't have key
+        print("You don't have a key with you so you go back into the halls.\n")
+        sleep(1)
+    else: # player has key
+        print("You fiddle around with the key and unlock the door.")
+        sleep(2)
+        print("The math room is dark. You flick on the lights and take a look around the room.")
+        sleep(1)
+        print("There's a few calculators and a textbook on the desk.")
+        sleep(0.5)
+        cont = True
+        while cont:
+            choice = raw_input("Will you look at the (C)alculators, read the (T)extbook, or (L)eave? (C/T/L)")
+            if choice.lower() == "c":
+                print("You take a look at the calculators.")
+                sleep(1)
+                print("They're charging.")
+                sleep(1.5)
+                print("Better leave them alone.")
+            elif choice.lower() == "l":
+                print("You shut off the lights and leave the math room.")
+                cont=False
+            elif choice.lower() == "t":
+                if dennis_riddle == False:
+                    print("You glance at the cover.")
+                    sleep(1)
+                    print("Small text at the bottom of the cover catches your eye.")
+                    sleep(1)
+                    print("Written by Bishawn??")
+                    sleep(1.5)
+                    print("Preposterous. You don't have time for fakes claiming to be the famous Bishawn.")
+                    sleep(1.5)
+                else:
+                    print("You glance at the cover and see 'Written by Bishan'.")
+                    sleep(0.75)
+                    print("It'll probably be a fake but it was worth a shot.")
+                    sleep(1)
+                    print("You open the book.")
+                    sleep(3)
+                    print("You are stunned as your head is flooded with knowledge.")
+                    sleep(1)
+                    print("You quickly shut the book before your brain is fried.")
+                    sleep(0.75)
+                    print("You think you have learned enough math.")
+            else:
+                print("You try to do",choice,"but trip.\nYou forget what you were trying to do when you get up.")
 
 def mpr():
-    print('''You walk into the vast MPR. It's a bit chilly. There's a lot of open space around
+    print('''\nYou walk into the vast MPR. It's a bit chilly. There's a lot of open space around
 You should be able to leave things here to come back for them later.''')
-    sleep(3)
+    sleep(2)
     mprStorageCall()
-    sleep(2)
+    sleep(1)
     inventoryCall()
-    sleep(2)
-    leave = raw_input("Do you want to leave anything in the MPR? (Y/N)\n")
-    if leave.lower()=="y":
+    sleep(1)
+    action = raw_input("Do you want to (T)ake something, (D)rop something, or (L)eave the MPR?\n").lower()
+    if action == "d":
         leaveInMPR()
-    take = raw_input("Do you want to take anything from the MPR? (Y/N)\n")
-    if take.lower()=="y":
+    elif action =="t":
         takeFromMPR()
+    elif action == 'l':
+        pass
+    else:
+        print ('You fumble with your hands, uncertain of what you want to do.')
     print("You exit into the hall.")
             
             
 def leaveInMPR():
     """Leave items in MPR"""
     cont=True
+    print ('\n')
     if len(inventory)>0:
         item = raw_input("What do you want to leave in the MPR?")
         while cont:
@@ -223,6 +275,7 @@ def leaveInMPR():
 def takeFromMPR():
     """Take items from MPR"""
     cont=True
+    print ('\n')
     if len(mprstorage)>0:
         item = raw_input("What do you want to take from the MPR?")
         while cont:
@@ -281,10 +334,22 @@ def research():
     pass    
 
 def courtyard():
-    for item in inventory:
-        if item == 'key':
-            global has_key
-            has_key = True
+    inventoryAdd('flashlight')
+    if 'flashlight' in inventory:
+        action = raw_input('''You walk out into the chilly night. You peer around in the darkness. You decide 
+to turn on the flashlight. A glint appears in some bushes. Do you want to search the bushes?\n''').strip().lower()
+        if action == 'yes' or action == 'y':
+            print ('You walk over to the bush and dig around.')
+            sleep(1)
+            for i in range(3):
+                print ('.')
+                sleep(0.67)
+            print('You found a key!')
+            inventoryAdd('key')
+        else:
+            print ("You decide that shiny glint isn't worth your time. You go back into the halls.")
+    else:
+        print ("It is the middle of the night. You cannot see anything. You go back into the halls.")
 
 def cim():
     pass
@@ -297,7 +362,7 @@ def hall():
         mapCall()
     elif command == 'i' or command == 'inv' or command == 'inventory':
         inventoryCall()    
-    elif command == 'q' or command == 'quit':
+    elif command == 'q' or command == 'quit' or command == 'exit':
         global end
         end = True
     elif command not in ROOMS:
@@ -326,30 +391,55 @@ def hall():
             sleep(1)
             cim()
     elif command == 'h':
+        sleep(1)
         help()
 
+def help():
+    print ('')
+    sleep(2)
+
 def intro():
-    INTRO_TIME=0.3
+    INTRO_TIME=0.33
     for i in 'LOW TECH LOW ADVENTURE':
         print(i, end="")
         sleep(INTRO_TIME)
+    
     sleep(1)
     global name
-    name = raw_input("What's your name?\n").strip().lower()
-    if name == 'chanas' or name == 'hanas' or name == 'chris':
+    name = raw_input("What's your name?\n").strip()
+    if name.lower() == 'chanas' or name.lower() == 'hanas' or name.lower() == 'chris':
         print ('Oh hello there Chris. How are you today? It would be great if we could get a 100. Thanks\n')
-    if name == 'jesus':
+    if name.lower() == 'jesus':
         print ('Hello Bob Dennis\n')
     if name == '':
         print ('Wow such a creative name. I applaud your parents.\n')
         name = '[REDACTED]'
     sleep(1)
+    for i in '''
+    ()
+    ||/////////////////////
+    ||~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+    ||~~ ~ ~ Low Tech~ ~ ~~
+    ||~ ~ Low University~ ~
+    ||~~ ~ ~ ~ ~ ~ ~ ~ ~ ~~
+    ||/////////////////////
+    ||
+    ||
+    ||
+    ||
+    ||
+    ||
+    ||
+    ||
+    ||
+    ||
+    ''':
+        print (i,end='')
+        sleep(0.025)
     print ('''\nYou stand outside your university, the famous Low Tech Low University,
 the #1 STEM University for 8 times in the past 7 years. A sudden urge comes over you.
 You feel like sending a mass mail. Today is your day.''')
     sleep(5)
-    
-    
     mapCall()
     print ('You enter the familiar halls.',end='')
 
@@ -373,9 +463,9 @@ if __name__ == '__main__':
                 for i in range(3):
                     print ('.')
                     sleep(0.67)
-                print ('\nHuh, neat.\n\n')
-                sleep(2)
-                print ('GAME OVER')
+                print ('Huh, neat.')
+                sleep(1)
+                print ('\n\nGAME OVER')
                 print ('THANKS FOR PLAYING')
                 game = False
             elif quitting == 'n' or quitting == 'n':
