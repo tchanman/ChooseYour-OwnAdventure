@@ -11,6 +11,7 @@ import os
 ROOMS = ['1','2','3','4','5','6','cse','court yard', 'math', 'mpr', 'research wing', 'cim']
 
 MAP_1 = '''
+
                          ..zeeeeeee....                             
                     .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$be. 
                  .e$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\              
@@ -36,9 +37,12 @@ MAP_1 = '''
                 "$$$$$$$$$$$$|  |$$$$$$$$$$$$"    
                   "*$$$$$$$$$|  |$$$$$$$$$*"       
                      ^"*$$$$$|  |$$$$$*""      
-                            "]  ["   '''
+                            "]  ["   
+                            
+                            '''
 
 MAP_2 = '''
+
                                                $$$$$$$$$
                                                $       $
                                                $ 6.CIM $
@@ -70,9 +74,12 @@ MAP_2 = '''
                 "$$$$$$$$$$$$|  |$$$$$$$$$$$$"             ================
                   "*$$$$$$$$$|  |$$$$$$$$$*"       
                      ^"*$$$$$|__|$$$$$*""      
-                            "    "   '''
+                            "    "   
+                            
+                            '''
 
 MAP_3 = '''
+
                                                $$$$$$$$$
                                                $       $
                                                $ 6.CIM $
@@ -104,7 +111,9 @@ MAP_3 = '''
                 "$$$$$$$$$$$$|@@|$$$$$$$$$$$$"             ================
                   "*$$$$$$$$$|  |$$$$$$$$$*"       
                      ^"*$$$$$|  |$$$$$*""      
-                            "]  ["   '''
+                            "]  ["   
+                            
+                            '''
 
 
 #Global variables
@@ -125,8 +134,48 @@ def mapCall():
     else:
         print (MAP_1)
 
-def cse():
-    pass
+def CSE():
+    print("You arrive at the CSE room and try the door, but it's locked.");
+    sleep(1)
+    
+    # branches based on player having/not having the door key
+    
+    if not "key" in inventory: # player doesn't have key
+        print("You don't have a key with you so you go back into the halls.\n")
+        sleep(1)
+    else: # player has key
+        print("Using the room key, you open the door and enter the room.")
+        sleep(1)
+        print("There's a computer on in the corner.")
+        sleep(0.75)
+        choice = raw_input("Do you want to go to the (C)omputer, or (L)eave the room: (C/L) ").lower()
+        sleep(0.75)
+        
+        # while loop until valid choice is chosen
+        while choice not in "cl":
+            choice = raw_input("That was not a choice. Choose C to go to the computer or L to leave the room." )
+            sleep(0.25)
+        
+        if choice == "l": # player leaves
+            print("You go back into the halls.\n")
+            sleep(1)
+        elif choice == "c": # player goes to computer
+            dennis = True
+            print("You sign into your gmail account. You open up an email and")
+            print("address it to the entire school... teachers included!")
+            
+            raw_input("What do you want to say? ") # does not matter
+            
+            print("\nYou look at your masterly crafted email and click send.\n")
+            sleep(1)
+            print("Suddenly you hear a BANG! SLAM! KABOOM! and a loud voice")
+            print("coming from around the research wing.\n")
+            sleep(1)
+            print("You don't think anything of it until it grows in intensity")
+            print("and you realize it's Mr. Dennis! You'd better check it out!\n")
+            sleep(1)
+            print("You rush back into the halls!")
+            sleep(1)
     
 def math():
     pass
@@ -281,51 +330,10 @@ def hall():
 
 def intro():
     INTRO_TIME=0.3
-    print ('L',end='')
-    sleep(INTRO_TIME)
-    print ('O',end='')
-    sleep(INTRO_TIME)
-    print ('W',end='')
-    sleep(INTRO_TIME)
-    print (' ',end='')
-    sleep(INTRO_TIME)
-    print ('T',end='')
-    sleep(INTRO_TIME)
-    print ('E',end='')
-    sleep(INTRO_TIME)
-    print ('C',end='')
-    sleep(INTRO_TIME)
-    print ('H',end='')
-    sleep(INTRO_TIME)
-    print (' ',end='')
-    sleep(INTRO_TIME)
-    print ('L',end='')
-    sleep(INTRO_TIME)
-    print ('O',end='')
-    sleep(INTRO_TIME)
-    print ('W',end='')
-    sleep(INTRO_TIME)
-    print (' ',end='')
-    sleep(INTRO_TIME)
-    print ('A',end='')
-    sleep(INTRO_TIME)
-    print ('D',end='')
-    sleep(INTRO_TIME)
-    print ('V',end='')
-    sleep(INTRO_TIME)
-    print ('E',end='')
-    sleep(INTRO_TIME)
-    print ('N',end='')
-    sleep(INTRO_TIME)
-    print ('T',end='')
-    sleep(INTRO_TIME)
-    print ('U',end='')
-    sleep(INTRO_TIME)
-    print ('R',end='')
-    sleep(INTRO_TIME)
-    print ('E',end='')
-    sleep(INTRO_TIME)
-    
+    for i in 'LOW TECH LOW ADVENTURE':
+        print(i, end="")
+        sleep(INTRO_TIME)
+    sleep(1)
     global name
     name = raw_input("What's your name?\n").strip().lower()
     if name == 'chanas' or name == 'hanas' or name == 'chris':
@@ -336,7 +344,7 @@ def intro():
         print ('Wow such a creative name. I applaud your parents.\n')
         name = '[REDACTED]'
     sleep(1)
-    print ('''You stand outside your university, the famous Low Tech Low University,
+    print ('''\nYou stand outside your university, the famous Low Tech Low University,
 the #1 STEM University for 8 times in the past 7 years. A sudden urge comes over you.
 You feel like sending a mass mail. Today is your day.''')
     sleep(5)
@@ -360,8 +368,11 @@ if __name__ == '__main__':
             quitting = raw_input('Are you sure you want to quit?\n').strip().lower()
             if quitting == 'yes' or quitting =='y':
                 clearScreen()
-                print ('\nYou remember you can use your phone to send your mass mail.') 
+                print ('You remember you can use your phone to send your mass mail.') 
                 sleep(1.5)
+                for i in range(3):
+                    print ('.')
+                    sleep(0.67)
                 print ('\nHuh, neat.\n\n')
                 sleep(2)
                 print ('GAME OVER')
