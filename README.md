@@ -1,2 +1,4 @@
-# 1819_bucketList
-Repository for midterm web-based BucketList project
+#Choose Your Own Adventure Game
+Repository for Low Tech Low Adventure game
+
+CSE 18-19

@@ -6,6 +6,7 @@ Player comes to LTLU to send a mass mail and finds hidden secrets in this thrill
 from __future__ import print_function
 from time import sleep
 import os
+import random
 
 #Constants
 MAP_1 = '''
@@ -115,7 +116,8 @@ MAP_3 = '''
 
 #Global variables
 dennis = False
-main_door_riddle = False
+math_riddle = False
+knowledge = False
 dennis_riddle = False
 inventory = []
 mprstorage = []
@@ -216,9 +218,9 @@ def math():
                     sleep(1)
                     print("Small text at the bottom of the cover catches your eye.")
                     sleep(1)
-                    print("Written by Bishawn??")
+                    print("Written by Bishan??")
                     sleep(1.5)
-                    print("Preposterous. You don't have time for fakes claiming to be the famous Bishawn.")
+                    print("Preposterous. You don't have time for fakes claiming to be the famous Bishan.")
                     sleep(1.5)
                 else:
                     print("You glance at the cover and see 'Written by Bishan'.")
@@ -232,6 +234,8 @@ def math():
                     print("You quickly shut the book before your brain is fried.")
                     sleep(0.75)
                     print("You think you have learned enough math.")
+                    global knowledge
+                    knowledge = True
             else:
                 print("You try to do",choice,"but trip.\nYou forget what you were trying to do when you get up.")
 
@@ -358,22 +362,48 @@ to turn on the flashlight. A glint appears in some bushes. Do you want to search
         print ("It is the middle of the night. You cannot see anything. You go back into the halls.")
 
 def cim():
-    print ('''You walk over to the research wing and see a room to the north. Of course! How could you
-have forgotten? It's the CIM room! You peer through the glass windows and find Bob himself, reading your email.''')
-    action = raw_input("What do you do?\n").lower()
-    print ("You try to ", action, "but before you can do anything, Bob Dennis runs out the door in a fit of rage.")
-    print ("Oh well.")
-    take = raw_input("Inside the CIM room, you see a TSA Trophy. Do you want to take the trophy or leave?").lower()
-    if take == 't' or take == 'take':
-        inventoryAdd('TSA Trophy')
-    elif take == 'leave' or take == 'l':
-        print ("You leave the nostalgic room and go back into the halls.")
+    if dennis:
+        print ('''You walk over to the research wing and see a room to the north. Of course! How could you
+    have forgotten? It's the CIM room! You peer through the glass windows and find Bob himself, reading your email.''')
+        action = raw_input("What do you want to do?\n").strip().lower()
+        print ("You try to", action, "but before you can do anything, Bob Dennis runs out the door in a fit of rage.")
+        print ("Quickly, you step inside the room.")
+        take_trophy()
+        print ("Your mission is accomplished. You think you should leave before Dennis finds you.")
+        global math_riddle
+        math_riddle = True
+        mapCall()
     else:
-        print ("You try to do",action, "but you find you can't. You go back into the halls.") 
-    print ("You look around and find the school is different.")
-    global dennis_riddle
-    dennis_riddle = True
-    mapCall()
+        print ('You walk back inside the quiet CIM room.')
+        if 'TSA Trophy' not in inventory:
+           take_trophy()
+        else:
+            print ("There's nothing here but empty desks and quietly running elevators in the back.")
+            if random()*10 > 8:
+                print('BANG WHFOOOOMM. You hear a loud whirring coming from the back. You realize its just the air compressor though.')
+            
+
+def take_trophy():
+    tsa = True
+    while tsa:
+        take = raw_input("Inside the CIM room, you see a TSA Trophy. Do you want to take the trophy or leave?\n").lower()
+        if take == 't' or take == 'take' or take == 'take the trophy':
+            inventoryAdd('TSA Trophy')
+            tsa = False
+        elif take == 'leave' or take == 'l':
+            print ("You leave the nostalgic room and go back into the halls.")
+            tsa = False
+        else:
+            print ("You try to do",take, "but you find you can't.")
+            
+def door():
+    print ("You peer out the door. It is cold. And lonely. Baby.")
+    quit = raw_input('Do you want to leave?\n')
+    if quit == 'y' or quit == 'yes':
+        global end 
+        end = True
+    else:
+        print ('You ')
 
 def hall():
     '''User decisions'''
@@ -383,9 +413,12 @@ def hall():
         mapCall()
     elif command == 'i' or command == 'inv' or command == 'inventory':
         inventoryCall()    
-    elif command == 'q' or command == 'quit' or command == 'exit' or command == '0' or command == 'front door':
+    elif command == 'q' or command == 'quit' or command == 'exit':
         global end
         end = True
+    elif command == '0' or command == 'front door':
+        sleep(1)
+        door()
     elif command == '1' or command == 'cse':
         sleep(1)
         cse()
