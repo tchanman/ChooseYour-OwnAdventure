@@ -669,16 +669,27 @@ much less solve it, with what you know now.""")
         print("You walk back into the halls, still confused.")
 
 def help():
-    print ('''
+    if not dennis_unleashed:
+        print ('''
 You're at a loss for what to do but see a handy dandy "How to Survive Low Tech" 
 pamphlet on the floor. You pick it up and read.
 
 Commands:
-1-6: Go to corresponding room
+0-5: Go to corresponding room
  M : Pull up your map
  I : Pull up your inventory
  Q : Quit the game
  H : Help menu
+ ''')
+    else:
+        print ('''
+You pull the pamphlet out of your pocket and read it again.
+Commands:
+0-6: Go to corresponding room
+ M : Pull up your map
+ I : Pull up your inventory
+ Q : Quit the game
+ H : Help menu... obviously
  ''')
     sleep(2)
 
