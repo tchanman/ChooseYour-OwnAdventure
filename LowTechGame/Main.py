@@ -39,7 +39,36 @@ MAP_1 = '''
                             "]  ["   
                         0. Front Door
                             '''
+MAP_4 = '''
 
+                         ..zeeeeeee....                             
+                    .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$be. 
+                 .e$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\              
+               .$$$$$$$$$$$$$$$$$$$$$$$$$$$^                   $$$        
+             .$$$$$$$$$$*""        ""**""                      $$$  
+            z$$$$$$$$""                                        $$$  
+           d$$$$$$$"                          4.Research Wing  $$$  
+          d$$$$$$"   1.CSE                                     $$$  
+         d$$$$$$"         _.-""""-._                           $$$  
+        .$$$$$$F        .'          `.                         $$$ 
+        d$$$$$$        /      __      \                        $$$  
+       .$$$$$$F       |     ==  ==     |       4$$$$$$$$$$$$$$$$$/           
+       :$$$$$$|      |  5.Court Yard    |      |$$$$$$$$$$$$$$$P"            
+       !$$$$$$|      |     ==    ==     |      |$$$$$$$            
+        $$$$$$b       |     ==__==     |       4$$$$$$'           
+        3$$$$$$        \              /        $$$$$$P            
+         $$$$$$b        `._        _.'        d$$$$$$"            
+         '$$$$$$b.         `-....-'          d$$$$$$F             
+          "$$$$$$$b  2.Math         3.MPR  .$$$$$$$P       ================
+           "$$$$$$$$.                    .$$$$$$$$"        Low Tech 
+            ^$$$$$$$$$e.              .e$$$$$$$$$"         Low Univerity
+              "$$$$$$$$$$$ee.    .ee$$$$$$$$$$$*           ================
+                "$$$$$$$$$$$$|  |$$$$$$$$$$$$"    
+                  "*$$$$$$$$$|  |$$$$$$$$$*"       
+                     ^"*$$$$$|==|$$$$$*""      
+                            "    "   
+                        0. Front Door
+                            '''
 MAP_2 = '''
 
                                                $$$$$$$$$
@@ -72,7 +101,7 @@ MAP_2 = '''
               "$$$$$$$$$$$ee.    .ee$$$$$$$$$$$*           Dennis Unleashed
                 "$$$$$$$$$$$$|  |$$$$$$$$$$$$"             ================
                   "*$$$$$$$$$|  |$$$$$$$$$*"       
-                     ^"*$$$$$|__|$$$$$*""      
+                     ^"*$$$$$|==|$$$$$*""      
                             "    "   
                         0. Front Door    
                             '''
@@ -119,6 +148,8 @@ dennis = False
 math_riddle = False
 knowledge = False
 dennis_riddle = False
+dennis_unleashed = False
+cim_visited = False
 inventory = []
 mprstorage = []
 end = False
@@ -127,9 +158,11 @@ name = ''
 #Functions
 def mapCall():
     if dennis:
-        print (MAP_2)
+        print (MAP_4)
     elif math_riddle:
         print (MAP_3)
+    elif dennis_unleashed:
+        print (MAP_2)
     else:
         print (MAP_1)
 
@@ -147,12 +180,12 @@ def cse():
         sleep(1)
         print("There's a computer on in the corner.")
         sleep(0.75)
-        choice = raw_input("Do you want to go to the (C)omputer, or (L)eave the room: (C/L) ").lower()
+        choice = raw_input("Do you want to go to the (C)omputer, or (L)eave the room: (C/L)\n").lower()
         sleep(0.75)
         
         # while loop until valid choice is chosen
         while choice not in "cl":
-            choice = raw_input("You wander around the room but you do not see that. What do you do?")
+            choice = raw_input("You wander around the room but you do not see that. What do you do?\n")
             sleep(0.25)
         
         if choice == "l": # player leaves
@@ -164,7 +197,7 @@ def cse():
             print("""You sign into your gmail account. You open up an email and 
 address it to the entire school... teachers included!""")
             
-            raw_input("What do you want to say? ") # does not matter
+            raw_input("What do you want to say?\n\n") # does not matter
             
             print("\nYou look at your masterly crafted email and click send.\n")
             sleep(1)
@@ -177,13 +210,14 @@ address it to the entire school... teachers included!""")
             print ("KABOOM!")
             sleep(1)
             print("...and a loud voice coming from around the research wing.\n")
-            sleep(1)
+            sleep(2)
             print("""You don't think anything of it until it grows in intensity 
 and you realize it's Mr. Dennis! You'd better check it out!\n""")
-            sleep(1)
+            sleep(3)
             print("You rush back into the halls!")
             sleep(1)
-            mapCall()
+            global dennis_unleashed
+            dennis_unleashed = True
     
 def math():
     print("You arrive at the math room and try the door, but it's locked.")
@@ -203,9 +237,9 @@ def math():
         sleep(0.5)
         cont = True
         while cont:
-            choice = raw_input("Will you look at the (C)alculators, read the (T)extbook, or (L)eave? (C/T/L)")
+            choice = raw_input("Will you look at the (C)alculators, read the (T)extbook, or (L)eave? (C/T/L)\n")
             if choice.lower() == "c":
-                print("You take a look at the calculators.")
+                print("\nYou take a look at the calculators.")
                 sleep(1)
                 print("They're charging.")
                 sleep(1.5)
@@ -215,7 +249,7 @@ def math():
                 cont=False
             elif choice.lower() == "t":
                 if dennis_riddle == False:
-                    print("You glance at the cover.")
+                    print("\nYou glance at the cover.")
                     sleep(1)
                     print("Small text at the bottom of the cover catches your eye.")
                     sleep(1)
@@ -224,7 +258,7 @@ def math():
                     print("Preposterous. You don't have time for fakes claiming to be the famous Bishan.")
                     sleep(1.5)
                 else:
-                    print("You glance at the cover and see 'Written by Bishan'.")
+                    print("\nYou glance at the cover and see 'Written by Bishan'.")
                     sleep(0.75)
                     print("It'll probably be a fake but it was worth a shot.")
                     sleep(1)
@@ -263,9 +297,8 @@ You should be able to leave things here to come back for them later.''')
 def leaveInMPR():
     """Leave items in MPR"""
     cont=True
-    print ('\n')
     if len(inventory)>0:
-        item = raw_input("What do you want to leave in the MPR?")
+        item = raw_input("What do you want to leave in the MPR?\n")
         while cont:
             inInventory = False
             for stuff in inventory:
@@ -273,7 +306,7 @@ def leaveInMPR():
                     inInventory = True
                     break
             if not inInventory:
-                item = raw_input("You search yourself for it but you can't find it. Try another item.")
+                item = raw_input("You search yourself for it but you can't find it. Try another item.\n")
             else:
                 print("You leave",item,"in the MPR.")
                 inventory.remove(item)
@@ -282,14 +315,13 @@ def leaveInMPR():
                 mprStorageCall()
                 cont=False
     else:
-        print("You don't have any items to leave in the MPR.")    
+        print("\nYou don't have any items with you to leave in the MPR.")    
     
 def takeFromMPR():
     """Take items from MPR"""
     cont=True
-    print ('\n')
     if len(mprstorage)>0:
-        item = raw_input("What do you want to take from the MPR?")
+        item = raw_input("What do you want to take from the MPR?\n")
         while cont:
             inStorage = False
             for stuff in mprstorage:
@@ -306,7 +338,7 @@ def takeFromMPR():
                 mprStorageCall()
                 cont=False
     else:
-        print("There aren't any items to take from the MPR.")   
+        print("\nThere aren't any items to take from the MPR.")   
 
 def mprStorageCall():
     """Prints things left in the mpr"""
@@ -354,12 +386,11 @@ def research():
         sleep(0.75)
         
         print("Do you want to head towards the (P)iano or get a laptop from",end="")
-        choice = raw_input("a (C)omputer cart? (P/C) ").lower()
+        choice = raw_input("a (C)omputer cart?\n").lower()
         sleep(0.75)
         
         while choice not in "pc":
-            print("That wasn't a choice. Choose P to go to the piano",end="")
-            choice = raw_input("or C to go a computer cart. ")
+            choice = raw_input("You look around. What the heck? That's not here. What do you want to do?\n")
             sleep(0.75)
         
         if choice == "p":
@@ -367,37 +398,37 @@ def research():
             sleep(0.25)
             print("on the piano, so you head towards the piano in the back.")
             sleep(0.75)
-            print("Just as you are about to play a beautiful rendition of")
-            sleep(0.25)
-            print("\"{},\" you see a flashlight on the ground.".format(memes[randint(0,3)]),end="")
-            sleep(0.75)
-            choice = raw_input("Do you want to pick it up? (Y/N)").lower()
-            sleep(0.75)
-            
-            while choice not in "yn":
-                print("That wasn't a choice. Choose Y to pick it up",end="")
-                choice = raw_input("or N if you don't want to. ")
+            if 'flashlight' not in inventory:
+                print("Just as you are about to play a beautiful rendition of")
+                sleep(0.25)
+                print("\"{},\" you see a flashlight on the ground.".format(memes[randint(0,3)]),end="")
                 sleep(0.75)
-
-            if choice == "y":
-                inventoryAdd('flashlight')
+                choice = raw_input("Do you want to pick it up?\n").lower()
+                sleep(0.75)
+                
+                while choice not in "yn":
+                    print("That wasn't a choice. Choose Y to pick it up",end="")
+                    choice = raw_input("or N if you don't want to. ")
+                    sleep(0.75)
+        
+                if choice == "y":
+                    inventoryAdd('flashlight')
+                else:
+                    print("You decide not to pick up the flashlight.")
+                    sleep(0.75)
             else:
-                print("You decide not to pick up the flashlight.")
-                sleep(0.75)
+                print ("You masterfully play \"{}.\" Beethoven would've cried. ".format(memes[randint(0,3)]))
         else:
             choice = raw_input("What computer cart (A-E) do you go to? ").lower()
             sleep(0.75)
             
-            while choice not in "abcde":
-                choice = raw_input("Choose a computer cart (a, b, c, d, or e) to go to: ")
-                sleep(0.75)
-            
-            print("You head to cart",choice.upper(),"but you see that there is nothing to")
-            sleep(0.25)
-            print("sign out a laptop (you wouldn't dare take one without")
-            sleep(0.25)
-            print("signing it out), so you leave it.")
-            sleep(0.75)
+            if choice not in 'abcde':
+                print("You look for that computer cart but it's not here")
+            else:
+                print("You head to cart",choice.upper(),"but you see that there is nothing to sign out a laptop with.")
+                sleep(1)
+                print("You wouldn't dare take one without signing it out. You leave it.")
+                sleep(1)
         
         print("You leave the research wing and head back to the hallways.")
         sleep(1)   
@@ -420,17 +451,41 @@ to turn on the flashlight. A glint appears in some bushes. Do you want to search
         print ("It is the middle of the night. You cannot see anything. You go back into the halls.")
 
 def cim():
-    if dennis:
+    global cim_visited
+    if not cim_visited and dennis_unleashed:
         print ('''You walk over to the research wing and see a room to the north. Of course! How could you
-    have forgotten? It's the CIM room! You peer through the glass windows and find Bob himself, reading your email.''')
-        action = raw_input("What do you want to do?\n").strip().lower()
-        print ("You try to", action, "but before you can do anything, Bob Dennis runs out the door in a fit of rage.")
+have forgotten? It's the CIM room! You peer through the glass windows and see your email on an open screen.''')
+        sleep(1)
         print ("Quickly, you step inside the room.")
+        sleep(1)
+        read = raw_input('You take in the old room and find some writing on the whiteboard. Do you want to read it?').strip().lower()
+        if read == 'y' or read == 'yes':
+            print(
+            '''
+                |===================================================|
+                |                                                   |
+                |                                                   |
+                |                                                   |
+                |            IM GUARDING THE FRONT DOOR             |
+                |                 YOU CAN'T ESCAPE                  |
+                |           COME AND FACE YOUR PUNISHMENT           |
+                |                                                   |
+                |                               - Dennis            |
+                |                                                   |
+                |                                                   |
+                |===================================================|
+            ''')
+            sleep(3)
+        else:
+            print ("You remember you forgot how to read in the second grade.")
+            sleep(2)
+            print('Dang.')
+            sleep(0.25)
         take_trophy()
         print ("Your mission is accomplished. You think you should leave before Dennis finds you.")
         global math_riddle
         math_riddle = True
-        mapCall()
+        cim_visited = True
     else:
         print ('You walk back inside the quiet CIM room.')
         if 'TSA Trophy' not in inventory:
@@ -444,10 +499,12 @@ def cim():
 def take_trophy():
     tsa = True
     while tsa:
-        take = raw_input("Inside the CIM room, you see a TSA Trophy. Do you want to take the trophy or leave?\n").lower()
+        take = raw_input("Inside the CIM room, you see a TSA Trophy. Do you want to (T)ake the trophy or (L)eave?\n").lower()
         if take == 't' or take == 'take' or take == 'take the trophy':
             inventoryAdd('TSA Trophy')
             tsa = False
+            if 'TSA Trophy' in inventory:
+                print('You feel the power of the second place TSA trophy. This might come in handy. You go back into the halls.')
         elif take == 'leave' or take == 'l':
             print ("You leave the nostalgic room and go back into the halls.")
             tsa = False
@@ -455,13 +512,16 @@ def take_trophy():
             print ("You try to do",take, "but you find you can't.")
             
 def door():
-    print ("You peer out the door. It is cold. And lonely. Baby.")
-    quit = raw_input('Do you want to leave?\n')
-    if quit == 'y' or quit == 'yes':
-        global end 
-        end = True
+    if not dennis_unleashed:
+        print ("You peer out the door. It is cold. And lonely. Baby.")
+        quit = raw_input('Do you want to leave Low Tech?\n')
+        if quit == 'y' or quit == 'yes':
+            global end 
+            end = True
+        else:
+            print ("You go back inside. You haven't sent your email yet.")
     else:
-        print ('You ')
+        dennisDoor()
 
 def hall():
     '''User decisions'''
@@ -598,7 +658,17 @@ much less solve it, with what you know now.""")
         print("You walk back into the halls, still confused.")
 
 def help():
-    print ('')
+    print ('''
+You're at a loss for what to do but see a handy dandy "How to Survive Low Tech" 
+pamphlet on the floor. You pick it up and read.
+
+Commands:
+1-6: Go to corresponding room
+ M : Pull up your map
+ I : Pull up your inventory
+ Q : Quit the game
+ H : Help menu
+ ''')
     sleep(2)
 
 def intro():
@@ -645,6 +715,7 @@ You feel like sending a mass mail. Today is your day.''')
     sleep(5)
     mapCall()
     print ('You enter the familiar halls.',end='')
+    help()
 
 def clearScreen():
     clear = lambda: os.system('cls')
