@@ -196,9 +196,11 @@ def cse():
             dennis = True
             print("""You sign into your gmail account. You open up an email and 
 address it to the entire school... teachers included!""")
+            sleep(2)
             
             raw_input("What do you want to say?\n\n") # does not matter
             
+            sleep(1)
             print("\nYou look at your masterly crafted email and click send.\n")
             sleep(1)
             print("Suddenly you hear...")
@@ -379,17 +381,17 @@ def research():
     Player actions while in the research wing
     """
     memes = ["We are Number One", "Darude Sandstorm", "Never Gonna Give You Up", "Allstar"]
-    if dennis:
+    if dennis and not cim_visited:
         cim()
     else:
         print("You walk in to the research wing and start walking around.")
         sleep(0.75)
         
-        print("Do you want to head towards the (P)iano or get a laptop from",end="")
-        choice = raw_input("a (C)omputer cart?\n").lower()
+        print("Do you want to head towards the (P)iano, get a laptop from",end="")
+        choice = raw_input("a (C)omputer cart or (L)eave?\n").lower()
         sleep(0.75)
         
-        while choice not in "pc":
+        while choice not in "pcl":
             choice = raw_input("You look around. What the heck? That's not here. What do you want to do?\n")
             sleep(0.75)
         
@@ -438,13 +440,22 @@ def courtyard():
         action = raw_input('''You walk out into the chilly night. You peer around in the darkness. You decide 
 to turn on the flashlight. A glint appears in some bushes. Do you want to search the bushes?\n''').strip().lower()
         if action == 'yes' or action == 'y':
-            print ('You walk over to the bush and dig around.')
+            print ('\nYou walk over to the bush and dig around.')
             sleep(1)
             for i in range(3):
                 print ('.')
                 sleep(0.67)
-            print('You found a key!')
-            inventoryAdd('key')
+            if 'key' in inventory or 'key' in mprstorage:
+                print("You didn't find anything. Just a worthless penny.")
+                penny = raw_input('Do you want to pick up the penny?\n').strip().lower()
+                if penny == 'y' or penny == 'yes':
+                    inventoryAdd('penny')
+                else:
+                    print("\nIt's only a penny. You go back to the halls.")
+            else:
+                print('You found a key!')
+                inventoryAdd('key')
+            
         else:
             print ("You decide that shiny glint isn't worth your time. You go back into the halls.")
     else:
@@ -458,7 +469,7 @@ have forgotten? It's the CIM room! You peer through the glass windows and see yo
         sleep(1)
         print ("Quickly, you step inside the room.")
         sleep(1)
-        read = raw_input('You take in the old room and find some writing on the whiteboard. Do you want to read it?').strip().lower()
+        read = raw_input('You take in the old room and find some writing on the whiteboard. Do you want to read it?\n').strip().lower()
         if read == 'y' or read == 'yes':
             print(
             '''
@@ -482,7 +493,7 @@ have forgotten? It's the CIM room! You peer through the glass windows and see yo
             print('Dang.')
             sleep(0.25)
         take_trophy()
-        print ("Your mission is accomplished. You think you should leave before Dennis finds you.")
+        print ("You should probably leave before Dennis finds you.")
         global math_riddle
         math_riddle = True
         cim_visited = True
