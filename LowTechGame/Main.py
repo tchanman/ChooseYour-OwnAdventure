@@ -733,8 +733,7 @@ def clearScreen():
     clear()
 
 #Main
-#if __name__ == '__main__':
-def main():
+if __name__ == '__main__':
     clearScreen()
     intro()
     game = True
