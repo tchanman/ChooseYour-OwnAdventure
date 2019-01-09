@@ -396,14 +396,10 @@ def research():
             sleep(0.75)
         
         if choice == "p":
-            print("You suddenly decide that you want to play something")
-            sleep(0.25)
-            print("on the piano, so you head towards the piano in the back.")
+            print("You suddenly decide that you want to play something on the piano, so you head towards the piano in the back.")
             sleep(0.75)
             if 'flashlight' not in inventory:
-                print("Just as you are about to play a beautiful rendition of")
-                sleep(0.25)
-                print("\"{},\" you see a flashlight on the ground.".format(memes[randint(0,3)]),end="")
+                print("Just as you are about to play a beautiful rendition of \"{},\" you see a flashlight on the ground.".format(memes[randint(0,3)]),end="")
                 sleep(0.75)
                 choice = raw_input("Do you want to pick it up?\n").lower()
                 sleep(0.75)
@@ -420,8 +416,8 @@ def research():
                     sleep(0.75)
             else:
                 print ("You masterfully play \"{}.\" Beethoven would've cried. ".format(memes[randint(0,3)]))
-        else:
-            choice = raw_input("What computer cart (A-E) do you go to? ").lower()
+        elif choice == 'c':
+            choice = raw_input("What computer cart (A-E) do you go to?\n").lower()
             sleep(0.75)
             
             if choice not in 'abcde':
@@ -430,7 +426,7 @@ def research():
                 print("You head to cart",choice.upper(),"but you see that there is nothing to sign out a laptop with.")
                 sleep(1)
                 print("You wouldn't dare take one without signing it out. You leave it.")
-                sleep(1)
+                sleep(2)
         
         print("You leave the research wing and head back to the hallways.")
         sleep(1)   
@@ -766,5 +762,6 @@ if __name__ == '__main__':
                 game = False
             elif quitting == 'n' or quitting == 'n':
                 print ('You doubted whether you can do this, however you shake your head and steel your resolve.')
+                end = False
             else:
                 print ('You confuse yourself by answering', quitting, 'to a yes or no question. You go back into the halls.')
