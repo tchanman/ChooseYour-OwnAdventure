@@ -1,0 +1,35 @@
+from __future__ import print_function
+from time import sleep
+def dennisDoor():
+    print("As you bend the corner to the front door and freedom, you spot Dennis guarding the entrance.")
+    sleep(1)
+    print("You hear he's saying something.")
+    sleep(3)
+    print("He's raving about the mass mail.")
+    sleep(1)
+    if "TSA Trophy" in inventory: 
+        print("You walk up with the TSA Trophy")
+        sleep(1)
+        print("You see the delight in Mr. Dennis's face.")
+        sleep(2)
+        print("He starts to talk about TSA")
+        sleep(2)
+        print("*20 minutes later*")
+        sleep(2)
+        print("Dennis is talking about his steak dinner with Arvind.")
+        sleep(2)
+        print("*1 hour later*")
+        sleep(2)
+        print("You agree with Dennis that elevators are fascinating.")
+        sleep(2)
+        print("Maybe the TSA Trophy was a bit too effective.")
+        sleep(1)
+        print("2 hours in, Dennis is appeased and has forgotten the mass mail.")
+        sleep(1)
+        print("He'll let you go... if you can answer his riddle.")
+        sleep(2)
+        print("You steel youself and prepare for whatever he can throw at you.")
+        sleep(3)
+    else:
+        print("You need something to get his mind off of the mass mail.")
+    
