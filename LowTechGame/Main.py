@@ -334,7 +334,6 @@ def research():
     pass    
 
 def courtyard():
-    inventoryAdd('flashlight')
     if 'flashlight' in inventory:
         action = raw_input('''You walk out into the chilly night. You peer around in the darkness. You decide 
 to turn on the flashlight. A glint appears in some bushes. Do you want to search the bushes?\n''').strip().lower()
