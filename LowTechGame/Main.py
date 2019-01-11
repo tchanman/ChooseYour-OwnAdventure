@@ -39,7 +39,7 @@ MAP_1 = '''
                             "]  ["   
                         0. Front Door
                             '''
-MAP_4 = '''
+MAP_2 = '''
 
                          ..zeeeeeee....                             
                     .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$be. 
@@ -69,13 +69,13 @@ MAP_4 = '''
                             "    "   
                         0. Front Door
                             '''
-MAP_2 = '''
+MAP_3 = '''
 
-                                               $$$$$$$$$
-                                               $       $
-                                               $ 6.CIM $
-                                               $       $
-                                               $$$} {$$$
+                                              $$$$$$$$$$$
+                                              $$       $$
+                                              $$ 6.CIM $$
+                                              $$       $$
+                                              $$$$} {$$$$
                                                   | |
                          ..zeeeeeee....           | |               
                     .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$| |$$$$$$$$be. 
@@ -106,63 +106,26 @@ MAP_2 = '''
                         0. Front Door    
                             '''
 
-MAP_3 = '''
-
-                                               $$$$$$$$$
-                                               $       $
-                                               $ 6.CIM $
-                                               $       $
-                                               $$$} {$$$
-                                                  | |
-                         ..zeeeeeee....           | |               
-                    .zd$$$$$$$$$$$$$$$$$$$$$$$$$$$| |$$$$$$$$be. 
-                 .e$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$} {$$$$$$$$$$$\              
-               .$$$$$$$$$$$$$$$$$$$$$$$$$$$^                   $$$        
-             .$$$$$$$$$$*""        ""**""                      $$$  
-            z$$$$$$$$""                                        $$$  
-           d$$$$$$$"                          4.Research Wing  $$$  
-          d$$$$$$"   1.CSE                                     $$$  
-         d$$$$$$"         _.-""""-._                           $$$  
-        .$$$$$$F        .'          `.                         $$$ 
-        d$$$$$$        /      __      \                        $$$  
-       .$$$$$$F       |     ==  ==     |       4$$$$$$$$$$$$$$$$$/           
-       :$$$$$$|      |  5.Court Yard    |      |$$$$$$$$$$$$$$$P"            
-       !$$$$$$|      |     ==    ==     |      |$$$$$$$            
-        $$$$$$b       |     ==__==     |       4$$$$$$'           
-        3$$$$$$        \              /        $$$$$$P            
-         $$$$$$b        `._        _.'        d$$$$$$"            
-         '$$$$$$b.         `-....-'          d$$$$$$F             
-          "$$$$$$$b  2.Math         3.MPR  .$$$$$$$P       ================
-           "$$$$$$$$.                    .$$$$$$$$"        Low Tech 
-            ^$$$$$$$$$e.              .e$$$$$$$$$"         Low Univerity
-              "$$$$$$$$$$$ee.    .ee$$$$$$$$$$$*           Dennis Unleashed
-                "$$$$$$$$$$$$|@@|$$$$$$$$$$$$"             ================
-                  "*$$$$$$$$$|  |$$$$$$$$$*"       
-                     ^"*$$$$$|  |$$$$$*""      
-                            "]  ["   
-                         0. Front Door   
-                            '''
-
 #Global variables
 dennis = False
-math_riddle = False
 knowledge = False
 dennis_riddle = False
-dennis_unleashed = False
 cim_visited = False
+end = False
+game = True
+
 inventory = []
 mprstorage = []
-end = False
+
 name = ''
+mail = ''
 
 #Functions
 def mapCall():
     if dennis:
-        print (MAP_4)
-    elif math_riddle:
-        print (MAP_3)
-    elif dennis_unleashed:
         print (MAP_2)
+    elif cim_visited:
+        print (MAP_3)
     else:
         print (MAP_1)
 
@@ -198,7 +161,8 @@ def cse():
 address it to the entire school... teachers included!""")
             sleep(2)
             
-            raw_input("What do you want to say?\n\n") # does not matter
+            global mail
+            mail = raw_input("What do you want to say?\n\n") # does not matter
             
             sleep(1)
             print("\nYou look at your masterly crafted email and click send.\n")
@@ -218,8 +182,6 @@ and you realize it's Mr. Dennis! You'd better check it out!\n""")
             sleep(3)
             print("You rush back into the halls!")
             sleep(1)
-            global dennis_unleashed
-            dennis_unleashed = True
     
 def math():
     print("You arrive at the math room and try the door, but it's locked.")
@@ -284,6 +246,7 @@ You should be able to leave things here to come back for them later.''')
     sleep(1)
     inventoryCall()
     sleep(1)
+    
     action = raw_input("Do you want to (T)ake something, (D)rop something, or (L)eave the MPR?\n").lower()
     if action == "d":
         leaveInMPR()
@@ -352,6 +315,7 @@ def mprStorageCall():
         statement = "There are a few things on the table: "
         for item in mprstorage:
             statement += item+", "
+        print (statement)
 
 def inventoryCall():
     """Prints things in inventory"""
@@ -425,7 +389,13 @@ def research():
             else:
                 print("You head to cart",choice.upper(),"but you see that there is nothing to sign out a laptop with.")
                 sleep(1)
-                print("You wouldn't dare take one without signing it out. You leave it.")
+                comp = raw_input("You look around... no one is looking. Do you take a computer?")
+                if comp in 'Yy':
+                    inventoryAdd('computer')
+                    print('You rebel.')
+                    print("You open the computer but you realize the last person using it didn't charge the carts.")
+                else:
+                    print ('Good boy.')
                 sleep(2)
         
         print("You leave the research wing and head back to the hallways.")
@@ -459,7 +429,7 @@ to turn on the flashlight. A glint appears in some bushes. Do you want to search
 
 def cim():
     global cim_visited
-    if not cim_visited and dennis_unleashed:
+    if not cim_visited and dennis:
         print ('''You walk over to the research wing and see a room to the north. Of course! How could you
 have forgotten? It's the CIM room! You peer through the glass windows and see your email on an open screen.''')
         sleep(1)
@@ -473,9 +443,9 @@ have forgotten? It's the CIM room! You peer through the glass windows and see yo
                 |                                                   |
                 |                                                   |
                 |                                                   |
-                |            IM GUARDING THE FRONT DOOR             |
+                |           I'M GUARDING THE FRONT DOOR             |
                 |                 YOU CAN'T ESCAPE                  |
-                |           COME AND FACE YOUR PUNISHMENT           |
+                |          COME AND FACE YOUR PUNISHMENT            |
                 |                                                   |
                 |                               - Dennis            |
                 |                                                   |
@@ -490,8 +460,6 @@ have forgotten? It's the CIM room! You peer through the glass windows and see yo
             sleep(0.25)
         take_trophy()
         print ("You should probably leave before Dennis finds you.")
-        global math_riddle
-        math_riddle = True
         cim_visited = True
     else:
         print ('You walk back inside the quiet CIM room.')
@@ -519,7 +487,7 @@ def take_trophy():
             print ("You try to do",take, "but you find you can't.")
             
 def door():
-    if not dennis_unleashed:
+    if not dennis:
         print ("You peer out the door. It is cold. And lonely. Baby.")
         quit = raw_input('Do you want to leave Low Tech?\n')
         if quit == 'y' or quit == 'yes':
@@ -613,9 +581,9 @@ def dennisDoor():
         
 def dennisRiddle():
     if knowledge:
-        print("Dennis gives his riddle:")
+        print("Dennis gives his riddle:\n")
         sleep(1)
-        print("What is 9+10?")
+        print("What is 9 + 10?\n")
         sleep(2)
         print("With your newfound knowledge, you now understand Dennis' tough question.")
         counter=0
@@ -639,6 +607,8 @@ def dennisRiddle():
             sleep(2)
             print ('\n\nGAME OVER')
             print ('THANKS FOR PLAYING')
+            global game
+            game = False
         else:
             sleep(2)
             print("Dennis lets you out of Low Tech.")
@@ -648,13 +618,20 @@ def dennisRiddle():
             print("You take out your phone to check just how long you spent in Low Tech.")
             sleep(2)
             print("You realize you could have used your phone to send the mass mail.")
-            
+            for i in range(3):
+                print ('.')
+                sleep(0.67)
             print("Huh neat.")
+            sleep(3)
+            win()
     else:
-        print("Dennis gives his riddle:")
+        print("Dennis gives his riddle:\n")
         sleep(1)
-        print("What is 9+10?")
-        sleep(3)
+        print("What is 9+10?\n")
+        for i in range(3):
+            print ('.')
+            sleep(0.67)
+        sleep(0.33)
         print("You stand in silence, struggling to comprehend this monstrously difficult riddle.")
         sleep(2)
         print("""The riddle is simply too hard. There's no way you can possibly understand it, 
@@ -665,7 +642,7 @@ much less solve it, with what you know now.""")
         print("You walk back into the halls, still confused.")
 
 def help():
-    if not dennis_unleashed:
+    if not dennis:
         print ('''
 You're at a loss for what to do but see a handy dandy "How to Survive Low Tech" 
 pamphlet on the floor. You pick it up and read.
@@ -688,6 +665,18 @@ Commands:
  H : Help menu... obviously
  ''')
     sleep(2)
+
+def win():
+    print("\n\nYOU WIN")
+    sleep(1)
+    print('\n')
+    print('\t\t\t' + mail+ '\n')
+    print('\t\t\t\t\t-' + name)
+    sleep(1)
+    print("THANKS FOR PLAYING")
+    print ("Items found: " + (len(inventory)+ len(mprstorage)) + '/4')
+    global game
+    game = False
 
 def intro():
     INTRO_TIME=0.33
@@ -740,12 +729,14 @@ def clearScreen():
     clear()
 
 #Main
-if __name__ == '__main__':
+def main():
+#if __name__ == '__main__':
     clearScreen()
     intro()
-    game = True
+    global game
     while game:
         hall()
+        global end
         if end:
             quitting = raw_input('Are you sure you want to quit?\n').strip().lower()
             if quitting == 'yes' or quitting =='y':
