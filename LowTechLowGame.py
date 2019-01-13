@@ -122,23 +122,67 @@ mail = ''
 
 #Functions
 def mapCall():
+    '''
+    Prints map based on progress in story
+    '''
+    
     if dennis:
         print (MAP_2)
     elif cim_visited:
         print (MAP_3)
     else:
         print (MAP_1)
+        
+def inventoryCall():
+    """
+    Prints things in inventory
+    """
+    
+    print("You have ", end="")
+    if len(inventory)==2:
+        print("a",inventory[0],"and a",inventory[1],"in your hands.")
+    elif len(inventory)==1:
+        print("a",inventory[0],"in your hands.")
+    else:
+        print("nothing in your hands.")
+        
+def inventoryAdd(obj):
+    """
+    Adds obj to inventory. obj should be a string
+    """
+    
+    size=1
+    if obj=="TSA Trophy":
+        size =2
+        print("The TSA Trophy takes two hands to pick up.")
+    if len(inventory)+size>2:
+        print("Your hands are too full to pick up",obj+".")
+    else:
+        print("You picked up",obj)
+        inventory.append(obj)
+    inventoryCall()
 
+def clearScreen():
+    '''
+    Clears iPython screen
+    '''
+    clear = lambda: os.system('cls')
+    clear()
+
+#Rooms and affiliated functions
 def cse():
+    '''
+    Initially locked, use key to open
+    Send mass mail to school, locks front door and opens CIM room
+    '''
+    
     print("You arrive at the CSE room and try the door, but it's locked.");
     sleep(1)
     
-    # branches based on player having/not having the door key
-    
-    if not "key" in inventory: # player doesn't have key
+    if not "key" in inventory:
         print("You go back into the halls.")
         sleep(1)
-    else: # player has key
+    else: 
         print("Using the room key, you open the door and enter the room.")
         sleep(1)
         print("There's a computer on in the corner.")
@@ -146,23 +190,22 @@ def cse():
         choice = raw_input("Do you want to go to the (C)omputer, or (L)eave the room: (C/L)\n").lower()
         sleep(0.75)
         
-        # while loop until valid choice is chosen
         while choice not in "cl":
             choice = raw_input("You wander around the room but you do not see that. What do you do?\n")
             sleep(0.25)
         
-        if choice == "l": # player leaves
+        if choice == "l": 
             print("You go back into the halls.")
             sleep(1)
-        elif choice == "c": # player goes to computer
+        elif choice == "c":
             global dennis
             dennis = True
-            print("""You sign into your gmail account. You open up an email and 
-address it to the entire school... teachers included!""")
+            print("You sign into your gmail account. You open up an email and")
+            print("address it to the entire school... teachers included!")
             sleep(2)
             
             global mail
-            mail = raw_input("What do you want to say?\n\n") # does not matter
+            mail = raw_input("What do you want to say?\n\n")
             
             sleep(1)
             print("\nYou look at your masterly crafted email and click send.\n")
@@ -177,28 +220,33 @@ address it to the entire school... teachers included!""")
             sleep(1)
             print("...and a loud voice coming from around the research wing.\n")
             sleep(2)
-            print("""You don't think anything of it until it grows in intensity 
-and you realize it's Mr. Dennis! You'd better check it out!\n""")
+            print("You don't think anything of it until it grows in intensity") 
+            print("and you realize it's Mr. Dennis! You'd better check it out!\n")
             sleep(3)
             print("You rush back into the halls!")
             sleep(1)
     
 def math():
+    '''
+    Initially locked, use key to open
+    Use textbook to solve door riddle and win game
+    Calculators as additional option, red herring
+    '''
+    
     print("You arrive at the math room and try the door, but it's locked.")
     sleep(1)
     
-    # branches based on player having/not having the door key
-    
-    if not "key" in inventory: # player doesn't have key
+    if not "key" in inventory:
         print("You don't have a key with you so you go back into the halls.\n")
         sleep(1)
-    else: # player has key
+    else:
         print("You fiddle around with the key and unlock the door.")
         sleep(2)
         print("The math room is dark. You flick on the lights and take a look around the room.")
         sleep(1)
         print("There's a few calculators and a textbook on the desk.")
         sleep(0.5)
+        
         cont = True
         while cont:
             choice = raw_input("Will you look at the (C)alculators, read the (T)extbook, or (L)eave? (C/T/L)\n")
@@ -239,28 +287,40 @@ def math():
                 print("You try to do",choice,"but trip.\nYou forget what you were trying to do when you get up.")
 
 def mpr():
-    print('''\nYou walk into the vast MPR. It's a bit chilly. There's a lot of open space around
-You should be able to leave things here to come back for them later.''')
+    '''
+    Item storage for player
+    '''
+    
+    print("\nYou walk into the vast MPR. It's a bit chilly. There's a lot of open space around")
+    print("You should be able to leave things here to come back for them later.")
     sleep(2)
     mprStorageCall()
     sleep(1)
     inventoryCall()
     sleep(1)
     
-    action = raw_input("Do you want to (T)ake something, (D)rop something, or (L)eave the MPR?\n").lower()
-    if action == "d":
-        leaveInMPR()
-    elif action =="t":
-        takeFromMPR()
-    elif action == 'l':
-        pass
-    else:
-        print ('You fumble with your hands, uncertain of what you want to do.')
+    has_items = True
+    while has_items:
+        action = raw_input("Do you want to (T)ake something, (D)rop something, or (L)eave the MPR?\n").lower()
+        if action == "d":
+            dropInMPR()
+        elif action =="t":
+            takeFromMPR()
+        elif action == 'l':
+            pass
+        else:
+            print ('You fumble with your hands, uncertain of what you want to do.')
+        if len(inventory) == 0:
+            has_items = False
+        
     print("You exit into the hall.")
             
             
-def leaveInMPR():
-    """Leave items in MPR"""
+def dropInMPR():
+    """
+    Drops items in MPR
+    """
+    
     cont=True
     if len(inventory)>0:
         item = raw_input("What do you want to leave in the MPR?\n")
@@ -283,7 +343,10 @@ def leaveInMPR():
         print("\nYou don't have any items with you to leave in the MPR.")    
     
 def takeFromMPR():
-    """Take items from MPR"""
+    """
+    Take items from MPR
+    """
+    
     cont=True
     if len(mprstorage)>0:
         item = raw_input("What do you want to take from the MPR?\n")
@@ -306,7 +369,10 @@ def takeFromMPR():
         print("\nThere aren't any items to take from the MPR.")   
 
 def mprStorageCall():
-    """Prints things left in the mpr"""
+    """
+    Prints things left in the mpr
+    """
+    
     if len(mprstorage)==0:
         print("Nothing is on the table.")
     elif len(mprstorage)==1:
@@ -317,33 +383,14 @@ def mprStorageCall():
             statement += item+", "
         print (statement)
 
-def inventoryCall():
-    """Prints things in inventory"""
-    print("You have ", end="")
-    if len(inventory)==2:
-        print("a",inventory[0],"and a",inventory[1],"in your hands.")
-    elif len(inventory)==1:
-        print("a",inventory[0],"in your hands.")
-    else:
-        print("nothing in your hands.")
-        
-def inventoryAdd(obj):
-    """Adds obj to inventory. obj should be a string"""
-    size=1
-    if obj=="TSA Trophy":
-        size =2
-        print("The TSA Trophy takes two hands to pick up.")
-    if len(inventory)+size>2:
-        print("Your hands are too full to pick up",obj+".")
-    else:
-        print("You picked up",obj)
-        inventory.append(obj)
-    inventoryCall()
+
 
 def research():
     """
-    Player actions while in the research wing
+    Player obtains flashlight at piano
+    Player obtains computer at computers, red-herring
     """
+    
     memes = ["We are Number One", "Darude Sandstorm", "Never Gonna Give You Up", "Allstar"]
     if dennis and not cim_visited:
         cim()
@@ -356,21 +403,22 @@ def research():
         sleep(0.75)
         
         while choice not in "pcl":
-            choice = raw_input("You look around. What the heck? That's not here. What do you want to do?\n")
+            choice = raw_input("You look around the vast wing. That's not here. What do you want to do?\n")
             sleep(0.75)
         
         if choice == "p":
             print("You suddenly decide that you want to play something on the piano, so you head towards the piano in the back.")
             sleep(0.75)
+            piece = memes[randint(0,3)]
             if 'flashlight' not in inventory:
-                print("Just as you are about to play a beautiful rendition of \"{},\" you see a flashlight on the ground.".format(memes[randint(0,3)]),end="")
+                print("Just as you are about to play a beautiful rendition of \"{},\" you see a flashlight on the ground.".format(piece,end=""))
                 sleep(0.75)
                 choice = raw_input("Do you want to pick it up?\n").lower()
                 sleep(0.75)
                 
-                while choice not in "yn":
-                    print("That wasn't a choice. Choose Y to pick it up",end="")
-                    choice = raw_input("or N if you don't want to. ")
+                while choice not in 'yn':
+                    print("You don't know what to do with your hands. Maybe you should've gotten more sleep.")
+                    choice = raw_input("Do you want to pick up the flashlight?\n")
                     sleep(0.75)
         
                 if choice == "y":
@@ -379,7 +427,7 @@ def research():
                     print("You decide not to pick up the flashlight.")
                     sleep(0.75)
             else:
-                print ("You masterfully play \"{}.\" Beethoven would've cried. ".format(memes[randint(0,3)]))
+                print ("You masterfully play \"{}.\" Beethoven would've cried. ".format(piece))
         elif choice == 'c':
             choice = raw_input("What computer cart (A-E) do you go to?\n").lower()
             sleep(0.75)
@@ -389,11 +437,12 @@ def research():
             else:
                 print("You head to cart",choice.upper(),"but you see that there is nothing to sign out a laptop with.")
                 sleep(1)
-                comp = raw_input("You look around... no one is looking. Do you take a computer?")
-                if comp in 'Yy':
+                comp = raw_input("You look around... no one is looking. Do you take a computer?").lower
+                if comp in 'yes':
                     inventoryAdd('computer')
                     print('You rebel.')
                     print("You open the computer but you realize the last person using it didn't charge the carts.")
+                    print('Damn')
                 else:
                     print ('Good boy.')
                 sleep(2)
@@ -402,6 +451,12 @@ def research():
         sleep(1)   
 
 def courtyard():
+    '''
+    Initially dark, use flashlight to see
+    Player obtains room key
+    Player obtains penny, extra item
+    '''
+    
     if 'flashlight' in inventory:
         action = raw_input('''You walk out into the chilly night. You peer around in the darkness. You decide 
 to turn on the flashlight. A glint appears in some bushes. Do you want to search the bushes?\n''').strip().lower()
@@ -412,12 +467,15 @@ to turn on the flashlight. A glint appears in some bushes. Do you want to search
                 print ('.')
                 sleep(0.67)
             if 'key' in inventory or 'key' in mprstorage:
-                print("You didn't find anything. Just a worthless penny.")
-                penny = raw_input('Do you want to pick up the penny?\n').strip().lower()
-                if penny == 'y' or penny == 'yes':
-                    inventoryAdd('penny')
+                if 'penny' in inventory or 'penny' in mprstorage:
+                    print("You didn't find anything. Go to sleep sometime geez...")
                 else:
-                    print("\nIt's only a penny. You go back to the halls.")
+                    print("You didn't find anything. Just a worthless penny.")
+                    penny = raw_input('Do you want to pick up the penny?\n').strip().lower()
+                    if penny == 'y' or penny == 'yes':
+                        inventoryAdd('penny')
+                    else:
+                        print("\nIt's only a penny. You go back to the halls.")
             else:
                 print('You found a key!')
                 inventoryAdd('key')
@@ -428,10 +486,15 @@ to turn on the flashlight. A glint appears in some bushes. Do you want to search
         print ("It is the middle of the night. You cannot see anything. You go back into the halls.")
 
 def cim():
+    '''
+    Initially locked, not accessible until certain game events
+    Player obtains TSA Trophy
+    '''
+    
     global cim_visited
     if not cim_visited and dennis:
-        print ('''You walk over to the research wing and see a room to the north. Of course! How could you
-have forgotten? It's the CIM room! You peer through the glass windows and see your email on an open screen.''')
+        print ("You walk over to the research wing and see a room to the north. Of course! How could you")
+        print("have forgotten? It's the CIM room! You peer through the glass windows and see your email on an open screen.")
         sleep(1)
         print ("Quickly, you step inside the room.")
         sleep(1)
@@ -451,12 +514,13 @@ have forgotten? It's the CIM room! You peer through the glass windows and see yo
                 |                                                   |
                 |                                                   |
                 |===================================================|
-            ''')
+            ''',end='')
+            print('\n',end='')
             sleep(3)
         else:
             print ("You remember you forgot how to read in the second grade.")
             sleep(2)
-            print('Dang.')
+            print('Ouch.')
             sleep(0.25)
         take_trophy()
         print ("You should probably leave before Dennis finds you.")
@@ -472,6 +536,9 @@ have forgotten? It's the CIM room! You peer through the glass windows and see yo
             
 
 def take_trophy():
+    '''
+    Take TSA Trophy
+    '''
     tsa = True
     while tsa:
         take = raw_input("Inside the CIM room, you see a TSA Trophy. Do you want to (T)ake the trophy or (L)eave?\n").lower()
@@ -487,6 +554,11 @@ def take_trophy():
             print ("You try to do",take, "but you find you can't.")
             
 def door():
+    '''
+    Front door, acts as quit option in beginning and win scene
+    Locks when certain game events occur
+    '''
+    
     if not dennis:
         print ("You peer out the door. It is cold. And lonely. Baby.")
         quit = raw_input('Do you want to leave Low Tech?\n')
@@ -498,50 +570,13 @@ def door():
     else:
         dennisDoor()
 
-def hall():
-    '''User decisions'''
-    sleep(1)
-    command = raw_input("Where do you want to go? (#) What do you want to do?\n").strip().lower()
-    if command == 'm' or command == 'map':
-        mapCall()
-    elif command == 'i' or command == 'inv' or command == 'inventory':
-        inventoryCall()    
-    elif command == 'q' or command == 'quit' or command == 'exit':
-        global end
-        end = True
-    elif command == '0' or command == 'front door':
-        sleep(1)
-        door()
-    elif command == '1' or command == 'cse':
-        sleep(1)
-        cse()
-    elif command == '2' or command == 'math':
-        sleep(1)
-        math()
-    elif command == '3' or command == 'mpr':
-        sleep(1)
-        mpr()
-    elif command == '4' or command == 'research wing':
-        sleep(1)
-        research()
-    elif command == '5' or command == 'court yard':
-        sleep(1)
-        courtyard()
-    elif command == '6' or command == 'cim':
-        if not dennis:
-            sleep(1)
-            print ("You vaguely remember a room like that but you don't find that around the halls.")
-        else:
-            sleep(1)
-            cim()
-    elif command == 'h':
-        sleep(1)
-        help()
-    else:
-        sleep(1)
-        print ("You wander around the halls but you don't find that room. Strange. Use command h for help.")
+
 
 def dennisDoor():
+    '''
+    Front door locked sequence
+    '''
+    
     print("As you bend the corner to the front door and freedom, you spot Dennis guarding the entrance.")
     sleep(1)
     print("You hear he's saying something.")
@@ -580,8 +615,13 @@ def dennisDoor():
         print("You need something to get his mind off of the mass mail.")
         
 def dennisRiddle():
+    '''
+    Unlocked by math textbook
+    Player given 3 chances to answer riddle, else game over
+    '''
+    
     if knowledge:
-        print("Dennis gives his riddle:\n")
+        print("\nDennis gives his riddle:")
         sleep(1)
         print("What is 9 + 10?\n")
         sleep(2)
@@ -612,10 +652,14 @@ def dennisRiddle():
         else:
             sleep(2)
             print("Dennis lets you out of Low Tech.")
-            sleep(2)
-            print("You step out into the fresh air, proud of your accomplishment.")
-            sleep(2)
+            sleep(1)
+            print("Just as you step out into the fresh air, the sun rises and shines down on you.")
+            sleep(1)
+            print("Your chest swells as you feel a sense of pride in your accomplishment.")
+            sleep(1)
             print("You take out your phone to check just how long you spent in Low Tech.")
+            sleep(2)
+            print('Oh right.')
             sleep(2)
             print("You realize you could have used your phone to send the mass mail.")
             for i in range(3):
@@ -634,14 +678,18 @@ def dennisRiddle():
         sleep(0.33)
         print("You stand in silence, struggling to comprehend this monstrously difficult riddle.")
         sleep(2)
-        print("""The riddle is simply too hard. There's no way you can possibly understand it, 
-much less solve it, with what you know now.""")
+        print("The riddle is simply too hard. There's no way you can possibly understand it")
+        print("much less solve it, with what you know now.")
         sleep(2)
         print("Dennis gives a jolly laugh and starts to talk about elevators again.")
         sleep(1)
         print("You walk back into the halls, still confused.")
 
 def help():
+    '''
+    Prints valid command options for player
+    '''
+    
     if not dennis:
         print ('''
 You're at a loss for what to do but see a handy dandy "How to Survive Low Tech" 
@@ -653,7 +701,7 @@ Commands:
  I : Pull up your inventory
  Q : Quit the game
  H : Help menu
- ''')
+ ''',end='')
     else:
         print ('''
 You pull the pamphlet out of your pocket and read it again.
@@ -663,11 +711,17 @@ Commands:
  I : Pull up your inventory
  Q : Quit the game
  H : Help menu... obviously
- ''')
+ ''',end='')
+    print('\n',end='')
     sleep(2)
 
 def win():
-    print("\n\nYOU WIN")
+    '''
+    Prints win statistics and ends game
+    '''
+    
+    clearScreen()
+    print("YOU WIN")
     sleep(1)
     print('\n')
     print('\t\t\t' + mail+ '\n')
@@ -679,6 +733,10 @@ def win():
     game = False
 
 def intro():
+    '''
+    Prints introductory scene
+    '''
+    
     INTRO_TIME=0.33
     for i in 'LOW TECH LOW ADVENTURE':
         print(i, end="")
@@ -724,13 +782,58 @@ You feel like sending a mass mail. Today is your day.''')
     print ('You enter the familiar halls.',end='')
     help()
 
-def clearScreen():
-    clear = lambda: os.system('cls')
-    clear()
+def hall():
+    '''
+    Player decisions to go to rooms
+    '''
+    
+    sleep(1)
+    command = raw_input("Where do you want to go? (#) What do you want to do?\n").strip().lower()
+    if command == 'm' or command == 'map':
+        mapCall()
+    elif command == 'i' or command == 'inv' or command == 'inventory':
+        inventoryCall()    
+    elif command == 'q' or command == 'quit' or command == 'exit':
+        global end
+        end = True
+    elif command == 'h':
+        sleep(1)
+        help()
+    elif command == '0' or command == 'front door':
+        sleep(1)
+        door()
+    elif command == '1' or command == 'cse':
+        sleep(1)
+        cse()
+    elif command == '2' or command == 'math':
+        sleep(1)
+        math()
+    elif command == '3' or command == 'mpr':
+        sleep(1)
+        mpr()
+    elif command == '4' or command == 'research wing':
+        sleep(1)
+        research()
+    elif command == '5' or command == 'court yard':
+        sleep(1)
+        courtyard()
+    elif command == '6' or command == 'cim':
+        if not dennis:
+            sleep(1)
+            print ("You vaguely remember a room like that but you don't find that around the halls.")
+        else:
+            sleep(1)
+            cim()
+    else:
+        sleep(1)
+        print ("You wander around the halls but you don't find that room. Strange. Use command h for help.")
 
 #Main
-def main():
-#if __name__ == '__main__':
+if __name__ == '__main__':
+    '''
+    Starts game immediately when program runs
+    '''
+    
     clearScreen()
     intro()
     global game
