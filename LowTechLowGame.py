@@ -2,7 +2,7 @@
 Low Tech Low Game
 Player comes to LTLU to send a mass mail and finds hidden secrets in this thrilling adventure
 
-By: Thomas Chan, Chukwuemekalum Kevin Patrick Echezona, and Jason Yan
+By: Thomas Chan, Emeka Echezona, and Jason Yan
 '''
 
 from __future__ import print_function
