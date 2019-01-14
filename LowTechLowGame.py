@@ -521,6 +521,9 @@ def cim():
                 print('BANG WHFOOOOMM. You hear a loud whirring coming from the back. You realize its just the air compressor though.')
 
 def readBoard():
+    """
+    Reads the board in the CIM room
+    """
     read = raw_input('You take in the old room and find some writing on the whiteboard. Do you want to read it?\n').strip().lower()
     if read == 'y' or read == 'yes':
         print(
