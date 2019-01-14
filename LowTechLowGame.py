@@ -313,7 +313,7 @@ def mpr():
         elif action =="t":
             takeFromMPR()
         elif action == 'l':
-            pass
+            break
         else:
             print ('You fumble with your hands, uncertain of what you want to do.')
         if len(inventory) == 0:
@@ -331,12 +331,7 @@ def dropInMPR():
     if len(inventory)>0:
         item = raw_input("What do you want to leave in the MPR?\n")
         while cont:
-            inInventory = False
-            for stuff in inventory:
-                if stuff.lower() == item.lower():
-                    inInventory = True
-                    break
-            if not inInventory:
+            if item not in inventory:
                 item = raw_input("You search yourself for it but you can't find it. Try another item.\n")
             else:
                 print("You leave",item,"in the MPR.")
@@ -357,12 +352,7 @@ def takeFromMPR():
     if len(mprstorage)>0:
         item = raw_input("What do you want to take from the MPR?\n")
         while cont:
-            inStorage = False
-            for stuff in mprstorage:
-                if stuff.lower() == item.lower():
-                    inStorage = True
-                    break
-            if not inStorage:
+            if item not in mprstorage:
                 item = raw_input("You search for it but you can't find it. Try another item.")
             else:
                 print("You take",item,"from the MPR.")
@@ -647,7 +637,7 @@ def dennisRiddle():
         while counter<3:
             if counter == 2:
                 print ("You can tell Dennis is growing impatient. This is your last chance, bud.")
-            answer = raw_input("What's your answer?")
+            answer = raw_input("What's your answer?\n")
             if answer == "19":
                 print("Dennis nods his head and approves.")
                 break
