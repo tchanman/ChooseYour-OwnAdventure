@@ -504,7 +504,28 @@ def cim():
         sleep(1)
         print ("Quickly, you step inside the room.")
         sleep(1)
-        read = raw_input('You take in the old room and find some writing on the whiteboard. Do you want to read it?\n').strip().lower()
+            readBoard()
+            sleep(3)
+        else:
+            print ("You remember you forgot how to read in the second grade.")
+            sleep(2)
+            print('Ouch.')
+            sleep(0.25)
+        takeTrophy()
+        print ("You should probably leave before Dennis finds you.")
+        cim_visited = True
+    else:
+        print ('You walk back inside the quiet CIM room.')
+        readBoard()
+        sleep(2)
+        if 'TSA Trophy' not in inventory:
+           takeTrophy()
+        else:
+            print ("There's nothing here but empty desks and quietly running elevators in the back.")
+            if randint(0,10) > 8:
+                print('BANG WHFOOOOMM. You hear a loud whirring coming from the back. You realize its just the air compressor though.')
+def readBoard():
+    read = raw_input('You take in the old room and find some writing on the whiteboard. Do you want to read it?\n').strip().lower()
         if read == 'y' or read == 'yes':
             print(
             '''
@@ -522,26 +543,8 @@ def cim():
                 |===================================================|
             ''',end='')
             print('\n',end='')
-            sleep(3)
-        else:
-            print ("You remember you forgot how to read in the second grade.")
-            sleep(2)
-            print('Ouch.')
-            sleep(0.25)
-        take_trophy()
-        print ("You should probably leave before Dennis finds you.")
-        cim_visited = True
-    else:
-        print ('You walk back inside the quiet CIM room.')
-        if 'TSA Trophy' not in inventory:
-           take_trophy()
-        else:
-            print ("There's nothing here but empty desks and quietly running elevators in the back.")
-            if randint(0,10) > 8:
-                print('BANG WHFOOOOMM. You hear a loud whirring coming from the back. You realize its just the air compressor though.')
-            
 
-def take_trophy():
+def takeTrophy():
     '''
     Take TSA Trophy
     '''
@@ -574,6 +577,8 @@ def door():
             end = True
         else:
             print ("You go back inside. You haven't sent your email yet.")
+    elif dennis_riddle:
+        dennisRiddle()
     else:
         dennisDoor()
 
