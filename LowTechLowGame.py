@@ -1,10 +1,12 @@
 '''
 Low Tech Low Game
 Player comes to LTLU to send a mass mail and finds hidden secrets in this thrilling adventure
+
+By: Thomas Chan, Chukwuemekalum Kevin Patrick Echezona, and Jason Yan
 '''
 
 from __future__ import print_function
-from time import sleep
+from time import sleep, time
 import os
 from random import randint
 
@@ -120,6 +122,8 @@ mprstorage = []
 name = ''
 mail = ''
 
+startTime = time()
+
 #Functions
 def mapCall():
     '''
@@ -166,6 +170,7 @@ def clearScreen():
     '''
     Clears iPython screen
     '''
+    
     clear = lambda: os.system('cls')
     clear()
 
@@ -539,6 +544,7 @@ def take_trophy():
     '''
     Take TSA Trophy
     '''
+    
     tsa = True
     while tsa:
         take = raw_input("Inside the CIM room, you see a TSA Trophy. Do you want to (T)ake the trophy or (L)eave?\n").lower()
@@ -724,11 +730,20 @@ def win():
     print("YOU WIN")
     sleep(1)
     print('\n')
-    print('\t\t\t' + mail+ '\n')
-    print('\t\t\t\t\t-' + name)
+    print('\t' + mail+ '\n')
+    print('\t\t-' + name)
     sleep(1)
     print("THANKS FOR PLAYING")
-    print ("Items found: " + (len(inventory)+ len(mprstorage)) + '/4')
+    sleep(1)
+    print ("\nItems Found: " + str(len(inventory)+ len(mprstorage)) + '/5')
+    print("\"Dennis\"s Unleashed: 1/1")
+    secret = str(int((name=='jesus') or (name=='chris')))
+    print("Secrets Unlocked: "+secret+"/1")
+    global startTime
+    totalTime = (time()-startTime)
+    mins = int(totalTime/60)
+    seconds = int(totalTime%60)
+    print("Time Elapsed: %02d:%02d" % (mins,seconds))
     global game
     game = False
 
@@ -834,6 +849,8 @@ if __name__ == '__main__':
     Starts game immediately when program runs
     '''
     
+    global startTime
+    startTime = time()
     clearScreen()
     intro()
     global game
