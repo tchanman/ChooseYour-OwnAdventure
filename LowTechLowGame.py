@@ -131,11 +131,12 @@ def mapCall():
     '''
     
     if dennis:
-        print (MAP_2)
+        print (MAP_2,end='')
     elif cim_visited:
-        print (MAP_3)
+        print (MAP_3,end='')
     else:
-        print (MAP_1)
+        print (MAP_1,end='')
+    print('\n',end='')
         
 def inventoryCall():
     """
@@ -752,10 +753,9 @@ def intro():
     Prints introductory scene
     '''
     
-    INTRO_TIME=0.33
     for i in 'LOW TECH LOW ADVENTURE':
         print(i, end="")
-        sleep(INTRO_TIME)
+        sleep(0.33)
     
     sleep(1)
     global name
@@ -849,14 +849,13 @@ if __name__ == '__main__':
     Starts game immediately when program runs
     '''
     
-    global startTime
     startTime = time()
     clearScreen()
     intro()
-    global game
+    game
     while game:
         hall()
-        global end
+        end
         if end:
             quitting = raw_input('Are you sure you want to quit?\n').strip().lower()
             if quitting == 'yes' or quitting =='y':
