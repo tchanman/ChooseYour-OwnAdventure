@@ -524,25 +524,26 @@ def cim():
             print ("There's nothing here but empty desks and quietly running elevators in the back.")
             if randint(0,10) > 8:
                 print('BANG WHFOOOOMM. You hear a loud whirring coming from the back. You realize its just the air compressor though.')
+
 def readBoard():
     read = raw_input('You take in the old room and find some writing on the whiteboard. Do you want to read it?\n').strip().lower()
-        if read == 'y' or read == 'yes':
-            print(
-            '''
-                |===================================================|
-                |                                                   |
-                |                                                   |
-                |                                                   |
-                |           I'M GUARDING THE FRONT DOOR             |
-                |                 YOU CAN'T ESCAPE                  |
-                |          COME AND FACE YOUR PUNISHMENT            |
-                |                                                   |
-                |                               - Dennis            |
-                |                                                   |
-                |                                                   |
-                |===================================================|
-            ''',end='')
-            print('\n',end='')
+    if read == 'y' or read == 'yes':
+        print(
+        '''
+            |===================================================|
+            |                                                   |
+            |                                                   |
+            |                                                   |
+            |           I'M GUARDING THE FRONT DOOR             |
+            |                 YOU CAN'T ESCAPE                  |
+            |          COME AND FACE YOUR PUNISHMENT            |
+            |                                                   |
+            |                               - Dennis            |
+            |                                                   |
+            |                                                   |
+            |===================================================|
+        ''',end='')
+        print('\n',end='')
 
 def takeTrophy():
     '''
