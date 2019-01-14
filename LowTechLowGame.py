@@ -504,13 +504,8 @@ def cim():
         sleep(1)
         print ("Quickly, you step inside the room.")
         sleep(1)
-            readBoard()
-            sleep(3)
-        else:
-            print ("You remember you forgot how to read in the second grade.")
-            sleep(2)
-            print('Ouch.')
-            sleep(0.25)
+        readBoard()
+        sleep(0.25)
         takeTrophy()
         print ("You should probably leave before Dennis finds you.")
         cim_visited = True
@@ -544,6 +539,12 @@ def readBoard():
             |===================================================|
         ''',end='')
         print('\n',end='')
+        sleep(3)
+    else:
+        print ("You remember you forgot how to read in the second grade.")
+        sleep(2)
+        print('Ouch.')
+        
 
 def takeTrophy():
     '''
