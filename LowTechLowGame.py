@@ -181,56 +181,62 @@ def cse():
     Initially locked, use key to open
     Send mass mail to school, locks front door and opens CIM room
     '''
+    global dennis
     
-    print("You arrive at the CSE room and try the door, but it's locked.");
-    sleep(1)
-    
-    if not "key" in inventory:
-        print("You go back into the halls.")
+    if not dennis:
+        print("You arrive at the CSE room and try the door, but it's locked.");
         sleep(1)
-    else: 
-        print("Using the room key, you open the door and enter the room.")
-        sleep(1)
-        print("There's a computer on in the corner.")
-        sleep(0.75)
-        choice = raw_input("Do you want to go to the (C)omputer, or (L)eave the room: (C/L)\n").lower()
-        sleep(0.75)
         
-        while choice not in "cl":
-            choice = raw_input("You wander around the room but you do not see that. What do you do?\n")
-            sleep(0.25)
-        
-        if choice == "l": 
+        if not "key" in inventory:
             print("You go back into the halls.")
             sleep(1)
-        elif choice == "c":
-            global dennis
-            dennis = True
-            print("You sign into your gmail account. You open up an email and")
-            print("address it to the entire school... teachers included!")
-            sleep(2)
+        else: 
+            print("Using the room key, you open the door and enter the room.")
+            sleep(1)
+            print("There's a computer on in the corner.")
+            sleep(0.75)
+            choice = raw_input("Do you want to go to the (C)omputer, or (L)eave the room: (C/L)\n").lower()
+            sleep(0.75)
             
-            global mail
-            mail = raw_input("What do you want to say?\n\n")
+            while choice not in "cl":
+                choice = raw_input("You wander around the room but you do not see that. What do you do?\n")
+                sleep(0.25)
             
-            sleep(1)
-            print("\nYou look at your masterly crafted email and click send.\n")
-            sleep(1)
-            print("Suddenly you hear...")
-            sleep(1)
-            print("BANG!")
-            sleep(1)
-            print ("SLAM!")
-            sleep(1)
-            print ("KABOOM!")
-            sleep(1)
-            print("...and a loud voice coming from around the research wing.\n")
-            sleep(2)
-            print("You don't think anything of it until it grows in intensity") 
-            print("and you realize it's Mr. Dennis! You'd better check it out!\n")
-            sleep(3)
-            print("You rush back into the halls!")
-            sleep(1)
+            if choice == "l": 
+                print("You go back into the halls.")
+                sleep(1)
+            elif choice == "c":
+                dennis = True
+                print("You sign into your gmail account. You open up an email and")
+                print("address it to the entire school... teachers included!")
+                sleep(2)
+                
+                global mail
+                mail = raw_input("What do you want to say?\n\n")
+                
+                sleep(1)
+                print("\nYou look at your masterly crafted email and click send.\n")
+                sleep(1)
+                print("Suddenly you hear...")
+                sleep(1)
+                print("BANG!")
+                sleep(1)
+                print ("SLAM!")
+                sleep(1)
+                print ("KABOOM!")
+                sleep(1)
+                print("...and a loud voice coming from around the research wing.\n")
+                sleep(2)
+                print("You don't think anything of it until it grows in intensity") 
+                print("and you realize it's Mr. Dennis! You'd better check it out!\n")
+                sleep(3)
+                print("You rush back into the halls!")
+                sleep(1)
+    else:
+        print("You head into the CSE room, and see that the monitor is still on.")
+        sleep(1)
+        print("You contemplate sending another mass mail but based on what's happened before")
+        print("you think it might not be the best idea. You look around woefully, and leave the room.")
     
 def math():
     '''
@@ -308,11 +314,11 @@ def mpr():
     has_items = True
     while has_items:
         action = raw_input("Do you want to (T)ake something, (D)rop something, or (L)eave the MPR?\n").lower()
-        if action == "d":
+        if action == "d" or action == "drop":
             dropInMPR()
-        elif action =="t":
+        elif action =="t" or action == "take":
             takeFromMPR()
-        elif action == 'l':
+        elif action == 'l' or action == "leave":
             break
         else:
             print ('You fumble with your hands, uncertain of what you want to do.')
@@ -353,7 +359,7 @@ def takeFromMPR():
         item = raw_input("What do you want to take from the MPR?\n")
         while cont:
             if item not in mprstorage:
-                item = raw_input("You search for it but you can't find it. Try another item.")
+                item = raw_input("You search for it but you can't find it. Try another item.\n")
             else:
                 print("You take",item,"from the MPR.")
                 inventory.append(item)
@@ -377,6 +383,7 @@ def mprStorageCall():
         statement = "There are a few things on the table: "
         for item in mprstorage:
             statement += item+", "
+        statement = statement[:-2]
         print (statement)
 
 
@@ -412,12 +419,12 @@ def research():
                 choice = raw_input("Do you want to pick it up?\n").lower()
                 sleep(0.75)
                 
-                while choice not in 'yn':
+                while choice not in 'ynyesno':
                     print("You don't know what to do with your hands. Maybe you should've gotten more sleep.")
                     choice = raw_input("Do you want to pick up the flashlight?\n")
                     sleep(0.75)
         
-                if choice == "y":
+                if choice == "y" or choice == "yes":
                     inventoryAdd('flashlight')
                 else:
                     print("You decide not to pick up the flashlight.")
@@ -433,10 +440,10 @@ def research():
             else:
                 print("You head to cart",choice.upper(),"but you see that there is nothing to sign out a laptop with.")
                 sleep(1)
-                comp = raw_input("You look around... no one is looking. Do you take a computer?").lower
-                if comp in 'yes':
+                comp = raw_input("You look around... no one is looking. Do you take a computer?\n").lower
+                if comp == 'yes' or comp == 'y':
                     inventoryAdd('computer')
-                    print('You rebel.')
+                    print('You rebel. If Dennis were here he would be mad.')
                     print("You open the computer but you realize the last person using it didn't charge the carts.")
                     print('Damn')
                 else:
@@ -685,8 +692,8 @@ def dennisRiddle():
         sleep(0.33)
         print("You stand in silence, struggling to comprehend this monstrously difficult riddle.")
         sleep(2)
-        print("The riddle is simply too hard. There's no way you can possibly understand it")
-        print("much less solve it, with what you know now.")
+        print("""The riddle is simply too hard. There's no way you can possibly understand it,
+much less solve it, with what you know now.""")
         sleep(2)
         print("Dennis gives a jolly laugh and starts to talk about elevators again.")
         sleep(1)
@@ -745,6 +752,15 @@ def win():
     mins = int(totalTime/60)
     seconds = int(totalTime%60)
     print("Time Elapsed: %02d:%02d" % (mins,seconds))
+    sleep(2)
+    print("\n")
+    sleep(.2)
+    print("\n")
+    sleep(.2)
+    print("\n")
+    sleep(.2)
+    print("\"I want my TSA Trophy back\"")
+    print("\t-Dennis")
     global game
     game = False
 
@@ -860,12 +876,19 @@ if __name__ == '__main__':
             quitting = raw_input('Are you sure you want to quit?\n').strip().lower()
             if quitting == 'yes' or quitting =='y':
                 clearScreen()
-                print ('You remember you can use your phone to send your mass mail.') 
+                if not dennis:
+                    gameOver1 = 'You remember you can use your phone to send your mass mail.'
+                    gameOver2 = 'Huh, neat.'
+                else:
+                    gameOver1 = '''Suddenly you wake up in bed, drenched in sweat and scared out of your wits,
+but you can't quite remember what had happened.'''
+                    gameOver2 = "Oh right. You were dreaming of your days in Low Tech Low University."
+                print (gameOver1) 
                 sleep(1.5)
                 for i in range(3):
                     print ('.')
                     sleep(0.67)
-                print ('Huh, neat.')
+                print (gameOver2)
                 sleep(1)
                 print ('\n\nGAME OVER')
                 print ('THANKS FOR PLAYING')
